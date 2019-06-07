@@ -37,7 +37,6 @@ public class TokenString extends Token implements TokenDefine{
                     posicaoFinal = scannerToken.posicao--;
                     token.setName(Names.STRINGLITERAL);
                     token.setLexema(input.substring(posicaoInicial, posicaoFinal));
-                    System.out.println("lexeme: " + getLexeme());
                     scannerToken.posicao += 2;
                     return true;
                 }

@@ -63,9 +63,7 @@ public class Id extends Token implements TokenDefine{
                 scannerToken.posicao++;
             }
             token.setName(Names.ID);
-            System.out.println(token.getName());
             token.setLexema(input.substring(startPos, scannerToken.posicao));
-            System.out.println(input.substring(startPos, scannerToken.posicao));
             idList.add(input.substring(startPos, scannerToken.posicao));
             isReserved(idList.get(idList.size()-1),token);
             return true;
@@ -75,7 +73,6 @@ public class Id extends Token implements TokenDefine{
     
     //TODO fazer algo com as palavras reservadas
     public void isReserved(String input, Token lToken){
-        System.out.println(reserved.containsKey(input));
         if(reserved.containsKey(input))
         {
             lToken.setName(reserved.get(input));

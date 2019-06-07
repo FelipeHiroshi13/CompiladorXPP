@@ -21,7 +21,6 @@ public class AnalisadorSintatico {
     }
     public void inicia(){
         Parser parser = new Parser(tokenList);
-        parser.imprime();
         parser.program();
     }
     

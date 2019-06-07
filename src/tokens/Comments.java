@@ -25,7 +25,6 @@ public class Comments extends Token implements TokenDefine{
         }
         if(input.charAt(scannerToken.posicao) == '/')
         {
-            System.out.println("oii");
             isLine(input, scannerToken, token);
             isBlock(input, scannerToken, token);
         }
@@ -35,7 +34,6 @@ public class Comments extends Token implements TokenDefine{
     public boolean isLine(String input, ScannerToken scannerToken, Token token){
         if(isNoEnded(scannerToken.posicao+1) && input.charAt(scannerToken.posicao+1) == '/'){
             scannerToken.posicao += 2;
-            System.out.println("line");
             while(isNoEnded(scannerToken.posicao)){
                 if(input.charAt(scannerToken.posicao) == '\n')
                    break;
@@ -51,10 +49,8 @@ public class Comments extends Token implements TokenDefine{
     public boolean isBlock(String input, ScannerToken scannerToken, Token token){
         if(isNoEnded(scannerToken.posicao+1) && input.charAt(scannerToken.posicao+1) == '*')
         {
-            System.out.println("block");
             scannerToken.posicao += 2;
             while(isNoEnded(scannerToken.posicao)){
-                System.out.println("--->" + input.charAt(scannerToken.posicao));
                 if(input.charAt(scannerToken.posicao) == '*'){
                     mult = true;
                     scannerToken.posicao++;
@@ -65,7 +61,6 @@ public class Comments extends Token implements TokenDefine{
                     }
                 }
                 scannerToken.posicao++;
-                System.out.println("ola");
             }
             isErrorLexico(scannerToken);
             if(div == true)

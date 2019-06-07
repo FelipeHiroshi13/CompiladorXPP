@@ -31,13 +31,6 @@ public class Parser {
             throw new SyntaxError("Identificador esperado");
     }
     
-    public void imprime(){
-        for(int i = 0; i < tokenList.size(); i++){
-            System.out.println("lToken" + tokenList.get(i).getName());
-            System.out.println("->lToken" + tokenList.get(i).getLexeme());
-        }
-    }
-    
     public void program() throws SyntaxError
     {
         lToken = tokenList.get(0);

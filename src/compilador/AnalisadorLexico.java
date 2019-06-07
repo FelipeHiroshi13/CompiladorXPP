@@ -35,15 +35,10 @@ public class AnalisadorLexico {
         
         do{
             token = scannerToken.nextToken();
-            //out.println(token.getName());
-            System.out.println("Name: " + token.getName());
-            System.out.println("Attribute: " + token.getAttribute());
             if(token.getName() == Names.UNDEF || token.getLexicalError() == true)
                 return token.erroLexico();
             addTokenList(tokenList, token);
-            System.out.println("\n");
         }while(token.getName() != Names.EOF);
-        System.out.println("");
         AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico(tokenList);
         analisadorSintatico.inicia();
         return sw;
