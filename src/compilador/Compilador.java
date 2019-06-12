@@ -26,9 +26,6 @@ public class Compilador {
         TelaPrincipal tela = new TelaPrincipal();
         SyntaxError.telaPrincipal = tela;
         tela.setVisible(true);   
-        Scanner scanner = new Scanner(System.in);
-        AnalisadorLexico analisadorLexico = new AnalisadorLexico(scanner.nextLine());  
-        analisadorLexico.Tokens();
     }
     
 }    

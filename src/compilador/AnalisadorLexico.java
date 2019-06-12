@@ -26,21 +26,19 @@ public class AnalisadorLexico {
         this.input = input;
     }
     
-    public StringWriter Tokens(){
+    public void Tokens(TelaPrincipal telaPrincipal){
         ScannerToken scannerToken = new ScannerToken(input);
-        StringWriter sw = new StringWriter();
-        PrintWriter out = new PrintWriter (sw);
         Token token;
         
         do{
             token = scannerToken.nextToken();
-            if(token.getName() == Names.UNDEF || token.getLexicalError() == true)
-                return token.erroLexico();
+            if(token.getName() == Names.UNDEF || token.getLexicalError() == true){
+                telaPrincipal.jSetTextAreaConsole("Erro Léxico na linha " + token.getLine());
+                erroLexico = true;
+            }
             addTokenList(tokenList, token);
         }while(token.getName() != Names.EOF);
-        AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico(tokenList);
-        sw = analisadorSintatico.inicia();
-        return sw;
+        System.out.println("");
     }
     
      private void addTokenList(List tokenList, Token token){

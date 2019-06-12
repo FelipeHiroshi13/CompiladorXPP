@@ -64,19 +64,19 @@ public class Token
     }
     
     public int getLine(){
-        return line;
+        return line+1;
     }
     
     public boolean getLexicalError(){
         return erroLexico;
     }
     
-    public StringWriter erroLexico(){
-        StringWriter sw = new StringWriter();
-        PrintWriter out = new PrintWriter (sw);
-        out.println("Erro Léxico na linha " + ++line);
-        return sw;
-    }
+//    public StringWriter erroLexico(){
+//        StringWriter sw = new StringWriter();
+//        PrintWriter out = new PrintWriter (sw);
+//        out.println("Erro Léxico na linha " + ++line);
+//        return sw;
+//    }
     
     public boolean isDefined(Token token){
         return token.getName() != Names.UNDEF;

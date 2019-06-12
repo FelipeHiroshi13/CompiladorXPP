@@ -19,16 +19,16 @@ import static source.SyntaxError.syntaxError;
  */
 public class AnalisadorSintatico {
     private List<Token> tokenList;
+
+            
     public AnalisadorSintatico(List tokenList){
         this.tokenList = tokenList;
     }
-    public StringWriter inicia(){
+    public void inicia(TelaPrincipal telaPrincipal){
         StringWriter sw = new StringWriter();
         Parser parser = new Parser(tokenList);
-        parser.program();
-        
-        
-        return sw;
+        //parser.program();
+        telaPrincipal.jSetTextAreaConsole("deu bom");
     }
     
   
