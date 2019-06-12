@@ -12,13 +12,11 @@ public class IntergerLiteral extends Token implements TokenDefine{
 	
 	@Override
 	public boolean tokenDefine(String input, ScannerToken scannerToken, Token token) {
+                this.input = input;
 		if(isNoDefineToken(scannerToken.posicao, token)) {
 			return false;
 		}else {
-			this.input = input;
-			if(isNegative(input, scannerToken, token))
-				return true;
-			else if(isPositive(input, scannerToken, token))
+			if(isPositive(input, scannerToken, token))
 				return true;
 			else
 				return false;
@@ -49,6 +47,7 @@ public class IntergerLiteral extends Token implements TokenDefine{
                 scannerToken.posicao++;
                 while(isNoEnded(scannerToken.posicao) && isDigit(scannerToken.posicao, input))
                     scannerToken.posicao++;
+                
                 isErrorLexico(scannerToken);
                 posicaoFinal = scannerToken.posicao;
                 token.setName(Names.INTEGER_LITERAL);
@@ -61,6 +60,8 @@ public class IntergerLiteral extends Token implements TokenDefine{
 
     @Override
     public boolean isErrorLexico(ScannerToken scannerToken) {
+        System.out.println(scannerToken.posicao);
+        System.out.println(isNoEnded(scannerToken.posicao));
         if(isNoEnded(scannerToken.posicao) && (isLetter(scannerToken.posicao, input))){
 	    setLexicalError();
             return true;

@@ -30,7 +30,7 @@ public class AnalisadorLexico {
         ScannerToken scannerToken = new ScannerToken(input);
         StringWriter sw = new StringWriter();
         PrintWriter out = new PrintWriter (sw);
-        
+        System.out.println("--->" + input);
         Token token;
         
         do{
@@ -39,6 +39,7 @@ public class AnalisadorLexico {
                 return token.erroLexico();
             addTokenList(tokenList, token);
         }while(token.getName() != Names.EOF);
+        System.out.println("");
         AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico(tokenList);
         analisadorSintatico.inicia();
         return sw;
