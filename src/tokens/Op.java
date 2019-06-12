@@ -63,7 +63,7 @@ public class Op extends Token implements TokenDefine{
         char chr = input.charAt(posicao);
         if(chr == '>')
         {
-            token.setName(Names.OP);
+            token.setName(Names.RELOP);
             token.setAttribute(Names.GT);
             scannerToken.posicao++;
             if(scannerToken.posicao < input.length()){
@@ -77,7 +77,7 @@ public class Op extends Token implements TokenDefine{
         }
         if(chr == '<')
         {
-            token.setName(Names.OP);
+            token.setName(Names.RELOP);
             token.setAttribute(Names.LT);
             scannerToken.posicao++;
             if(scannerToken.posicao < input.length()){
@@ -90,7 +90,7 @@ public class Op extends Token implements TokenDefine{
                
         }
         if(chr == '='){
-            token.setName(Names.OP);
+            token.setName(Names.RELOP);
             token.setAttribute(Names.EQ);
             scannerToken.posicao++;
             if(scannerToken.posicao <input.length()){  
@@ -109,7 +109,7 @@ public class Op extends Token implements TokenDefine{
                 scannerToken.posicao++;
                 //isErrorLexico(scannerToken);
                 if(input.charAt(scannerToken.posicao) ==  '='){
-                    token.setName(Names.OP);
+                    token.setName(Names.RELOP);
                     token.setAttribute(Names.DIF);
                     scannerToken.posicao++;
                 }

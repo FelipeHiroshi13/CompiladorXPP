@@ -55,6 +55,7 @@ public enum Names {
     ELSE,
     FOR,
     NEW,
+    RELOP,
     CONSTRUCTOR,
     EOF,
 }
