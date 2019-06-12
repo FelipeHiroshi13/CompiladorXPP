@@ -40,7 +40,11 @@ public class Parser {
             classList();               
         }
         else
+        {
+            
             throw new SyntaxError("Classe mal definida");
+            
+        }
     }
     
     public void classList() 

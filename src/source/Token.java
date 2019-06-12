@@ -83,7 +83,6 @@ public class Token
     }
     
     public boolean isNoEnded(int posicao){
-        System.out.println(length);
         return posicao < length;
     }
     
@@ -92,8 +91,6 @@ public class Token
     }
     
     public boolean isLetter(int posicao, String input){
-        System.out.println(posicao + input);
-        System.out.println("-->"  +input.charAt(posicao));
         return Character.isLetter(input.charAt(posicao));
     }
     

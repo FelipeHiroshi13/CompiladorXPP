@@ -5,6 +5,10 @@
  */
 package source;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import compilador.TelaPrincipal;
+
 /**
  *
  * @author 201719050163
@@ -12,7 +16,10 @@ package source;
 public class SyntaxError extends RuntimeException
 {
     private String msg;
+    public static TelaPrincipal telaPrincipal;
     
+    
+    public static boolean syntaxError = false;
     public SyntaxError()
     {
         msg = "Unexpected";
@@ -21,8 +28,11 @@ public class SyntaxError extends RuntimeException
     
     public SyntaxError(String str)
     {
+        
         super(str);
         msg = str;
+        syntaxError = true;
+        telaPrincipal.jSetTextAreaConsole(msg);
     }
     
     public String toString()

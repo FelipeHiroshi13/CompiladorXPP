@@ -1,8 +1,11 @@
 package compilador;
-
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.List;
 import source.Parser;
 import source.Token;
+import source.SyntaxError;
+import static source.SyntaxError.syntaxError;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,9 +22,13 @@ public class AnalisadorSintatico {
     public AnalisadorSintatico(List tokenList){
         this.tokenList = tokenList;
     }
-    public void inicia(){
+    public StringWriter inicia(){
+        StringWriter sw = new StringWriter();
         Parser parser = new Parser(tokenList);
         parser.program();
+        
+        
+        return sw;
     }
     
   

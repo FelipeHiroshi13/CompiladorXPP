@@ -123,7 +123,6 @@ public class Op extends Token implements TokenDefine{
     public boolean isErrorLexico(ScannerToken scannerToken) {
         //System.out.println(input.charAt(scannerToken.posicao));
         if(input.charAt(scannerToken.posicao) != '=' && input.charAt(scannerToken.posicao) != ' '){
-            System.out.println("oioi");
             setLexicalError();
             return true;
         }

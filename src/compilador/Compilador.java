@@ -8,6 +8,7 @@ package compilador;
 //import java.io.FileReader;
 
 import java.util.Scanner;
+import source.SyntaxError;
 
 //import java.util.Scanner;
 
@@ -23,6 +24,7 @@ public class Compilador {
     public static void main(String[] args) {
 //        // TODO code application logic here
         TelaPrincipal tela = new TelaPrincipal();
+        SyntaxError.telaPrincipal = tela;
         tela.setVisible(true);   
         Scanner scanner = new Scanner(System.in);
         AnalisadorLexico analisadorLexico = new AnalisadorLexico(scanner.nextLine());  

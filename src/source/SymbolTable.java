@@ -31,8 +31,6 @@ public class SymbolTable <T extends STEntry> implements Iterable<T>
 
     public boolean add(T t)
     {
-        //System.out.print(t.lexeme);
-        
         if (symbols.containsKey(t.lexeme))
                 return false;
         symbols.put(t.lexeme, t);

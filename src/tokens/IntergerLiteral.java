@@ -60,8 +60,6 @@ public class IntergerLiteral extends Token implements TokenDefine{
 
     @Override
     public boolean isErrorLexico(ScannerToken scannerToken) {
-        System.out.println(scannerToken.posicao);
-        System.out.println(isNoEnded(scannerToken.posicao));
         if(isNoEnded(scannerToken.posicao) && (isLetter(scannerToken.posicao, input))){
 	    setLexicalError();
             return true;

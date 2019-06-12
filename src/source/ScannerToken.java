@@ -40,7 +40,6 @@ public class ScannerToken {
     public Token nextToken()
     {   
         Token token = new Token();
-        System.out.println(input.length());
         token.setLength(input.length());
         whiteSpace.isWhiteSpace(input, this);
         token.setLine(whiteSpace.getLineCount());
