@@ -36,14 +36,11 @@ public class Parser {
         lToken = tokenList.get(0);
         if(lToken.getName() == Names.CLASS)
         {
-       
             classList();               
         }
-        else
+        else if(lToken.getName() != Names.EOF)
         {
-            
             throw new SyntaxError("Classe mal definida");
-            
         }
     }
     

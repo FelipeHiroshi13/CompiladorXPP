@@ -19,7 +19,20 @@ import static source.SyntaxError.syntaxError;
  */
 public class AnalisadorSintatico {
     private List<Token> tokenList;
-
+    String msg = "................/¯`,\n" +
+"........../´¯/..../\n" +
+"....../¯/.../..../\n" +
+"..../../.../..../..,-----,\n" +
+"../../.../....//´...........`.\n" +
+"./../.../..../......../´¯\\....\\\n" +
+"('.('..('....('.......|.....'._.'\n" +
+".\\....................`\\.../´...)\n" +
+"...\\.....................V...../\n" +
+".....\\........................./\n" +
+".......`•...................•´\n" +
+"..........|.................|\n" +
+"........▓▒▒▒▒▒▒▒▓\n" +
+"........▓▒▒▒▒▒▒▒▓";
             
     public AnalisadorSintatico(List tokenList){
         this.tokenList = tokenList;
@@ -27,8 +40,8 @@ public class AnalisadorSintatico {
     public void inicia(TelaPrincipal telaPrincipal){
         StringWriter sw = new StringWriter();
         Parser parser = new Parser(tokenList);
-        //parser.program();
-        telaPrincipal.jSetTextAreaConsole("deu bom");
+        parser.program();
+        telaPrincipal.jSetTextAreaConsole(msg);
     }
     
   
