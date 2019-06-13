@@ -45,7 +45,7 @@ public class Parser {
         {
             classList();               
         }
-        else if(lToken.getName() != Names.EOF)
+        else
         {
             throw new SyntaxError("Classe mal definida");
         }
@@ -58,18 +58,15 @@ public class Parser {
             classDecl();
             classListLinha();
         }
-        else
-            throw new SyntaxError("Classe mal definida");
         
     }
     
     public void classListLinha()
     {
-         if(lToken.getName() == Names.CLASS)
+        if(lToken.getName() == Names.CLASS)
         {
             classList();               
-        } else
-            throw new SyntaxError("Classe mal definida");
+        } 
     }
     
     public void classDecl() 
@@ -102,6 +99,7 @@ public class Parser {
             advance();
             varDeclListOpt();
             constructDeclListOpt();
+           
             methodDeclListOpt();
             match(Names.SEP, Names.CHD);
         }
@@ -115,8 +113,6 @@ public class Parser {
         {
             varDeclList();
         }
-        else
-            throw new SyntaxError("Tipo da variavel mal definido");
     }
     public void varDeclList()
     {
@@ -129,38 +125,33 @@ public class Parser {
     
     public void varDeclListinha()
     {   
-        System.out.println(lToken.getName());
-        System.out.println(lToken.getAttribute());
+       
         if(lToken.isVariableType(lToken))
         {
             varDecl();
             varDeclListinha();
-        } else
-            throw new SyntaxError("Tipo da variavel mal definido");
+        } 
     }
     
     public void varDecl()
     {
-        if(lToken.isVariableType(lToken))
-        {
-            varDeclLinha();
-        }
+        
+        this.type();
+        varDeclLinha();
+        
     }
     
     public void varDeclLinha()
     {
+        this.type();
         if(lToken.isVariableType(lToken))
         {
-            advance();
-
             if (lToken.getAttribute()== Names.COE) 
             {
                 advance();
                 match(Names.SEP, Names.COD);
             }
         }
-        else
-            throw new SyntaxError("Tipo da variavel mal definido");
         match(Names.ID);
         varDeclOpt();
     }
@@ -177,51 +168,56 @@ public class Parser {
 
     public void type()
     {
+        
         if(lToken.isVariableType(lToken))
         {
+            System.out.println(lToken.getName());
+            System.out.println(lToken.getAttribute());
             advance();
         }
         else
             throw new SyntaxError("Tipo de variavel nao existente");
+       
             
     }
     public void constructDeclListOpt()
     {
+      
         if (lToken.getName() == Names.CONSTRUCTOR)
             constructDeclList();
     }
     public void constructDeclList() // Esse metodo e o de baixo sao realmente necessarios ?
     {
+       
+        constructDecl();
         if (lToken.getName() == Names.CONSTRUCTOR)
         {
-            constructDecl();
             constructDeclListLinha();
         }
-        else
-            throw new SyntaxError("Construtor nao definido");
+      
         
     }
     
      public void constructDeclListLinha()
     {
+       
         if (lToken.getAttribute()== Names.CONSTRUCTOR)
         {
             constructDecl();
             constructDeclListLinha();
         }
-        else
-            throw new SyntaxError("Construtor nao definido");
+       
     }
      
     public void constructDecl()
     {
+       
         if (lToken.getName() == Names.CONSTRUCTOR)
         {
             match(Names.CONSTRUCTOR);
             methodBody();
         }
-        else
-             throw new SyntaxError("Construtor nao definido");
+      
         
     }
     public void methodDeclListOpt()
@@ -238,8 +234,7 @@ public class Parser {
             methodDecl();
             methodDeclListLinha();
         } 
-        else   
-            throw new SyntaxError("Tipo de variavel nao definido");
+        
     }
     
     public void methodDeclListLinha()
@@ -249,8 +244,7 @@ public class Parser {
             methodDecl();
             methodDeclListLinha();
         } 
-        else   
-            throw new SyntaxError("Tipo de variavel nao definido");
+       
     }
     
     public void methodDecl()
@@ -260,8 +254,7 @@ public class Parser {
             type();
             methodDeclLinha();
         }
-        else   
-            throw new SyntaxError("Tipo de variavel nao definido");
+       
     }
     public void methodDeclLinha()
     {
@@ -284,15 +277,13 @@ public class Parser {
             statementsOpt();
             match(Names.SEP, Names.COD);
         }
-        else   
-            throw new SyntaxError("Parenteses nao aberto");
+     
     }
     public void paramListOpt()
     {
         if ((lToken.isVariableType(lToken)))
             paramList();
-        else
-            throw new SyntaxError("Tipo de variavel nao definido");
+      
 
     }
     public void paramList()
@@ -302,8 +293,7 @@ public class Parser {
             param();
             paramListLinha();
         }
-        else
-            throw new SyntaxError("Tipo de variavel nao definido");
+        
     }
     
      public void paramListLinha()
@@ -314,8 +304,7 @@ public class Parser {
             param();
             paramListLinha();
         }
-        else
-            throw new SyntaxError("Ausencia do divisor de parametros");
+       
               
     }
     public void param()
@@ -325,8 +314,7 @@ public class Parser {
             type();
             paramLinha();   
         }
-        else
-            throw new SyntaxError("Tipo de variavel nao definido");
+      
 
     }
     
@@ -404,8 +392,7 @@ public class Parser {
             match(Names.RELOP, Names.EQUALS);
             atribStatLinha();
         }
-        else
-            throw new SyntaxError("Atribuicao de declaracao invalida");
+       
 
     }
     public void atribStatLinha()
@@ -418,8 +405,7 @@ public class Parser {
         {
             allocExpression();
         }
-        else
-            throw new SyntaxError("Token invalido");
+       
     }
     public void printStat()
     {
@@ -428,8 +414,7 @@ public class Parser {
             advance();
             expression();
         }
-        else
-            throw new SyntaxError("Comando nao reconhecido");
+       
     }
     public void readStat()
     {
@@ -438,8 +423,7 @@ public class Parser {
             advance();
             lValue();
         }
-        else
-            throw new SyntaxError("Comando nao reconhecido");
+     
     }
     public void returnStat()
     {
@@ -448,8 +432,7 @@ public class Parser {
             advance();
             expression();
         }
-        else
-            throw new SyntaxError("Comando nao reconhecido");
+   
     }
     public void superStat()
     {
@@ -459,8 +442,7 @@ public class Parser {
             argListOpt();
             match(Names.SEP, Names.PD);
         }
-        else
-            throw new SyntaxError("Comando nao reconhecido");
+       
     }
     public void ifStat()
     {
@@ -475,8 +457,7 @@ public class Parser {
             match(Names.SEP,Names.CHD);
             ifStatLinha();
         }
-        else
-            throw new SyntaxError("Comando nao reconhecido");
+      
     }
     public void ifStatLinha()
     {
