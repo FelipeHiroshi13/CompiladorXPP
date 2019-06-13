@@ -154,7 +154,6 @@ public class Parser {
         if(lToken.isVariableType(lToken))
         {
             advance();
-            System.out.println(lToken.getAttribute());
             if (lToken.getAttribute()== Names.COE) 
             {
                 advance();
