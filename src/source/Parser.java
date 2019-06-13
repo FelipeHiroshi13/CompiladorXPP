@@ -99,7 +99,6 @@ public class Parser {
     public void classBody()
     {
         if(lToken.getAttribute()== Names.CHE){
-            System.out.println("oioi");
             advance();
             varDeclListOpt();
             constructDeclListOpt();
@@ -121,17 +120,17 @@ public class Parser {
     }
     public void varDeclList()
     {
+        varDecl();
         if(lToken.isVariableType(lToken))
         {
-            varDecl();
             varDeclListinha();
         }
-        else
-            throw new SyntaxError("Tipo da variavel mal definido");
     }
     
     public void varDeclListinha()
-    {
+    {   
+        System.out.println(lToken.getName());
+        System.out.println(lToken.getAttribute());
         if(lToken.isVariableType(lToken))
         {
             varDecl();
@@ -144,7 +143,6 @@ public class Parser {
     {
         if(lToken.isVariableType(lToken))
         {
-            advance();
             varDeclLinha();
         }
     }
@@ -154,13 +152,12 @@ public class Parser {
         if(lToken.isVariableType(lToken))
         {
             advance();
+
             if (lToken.getAttribute()== Names.COE) 
             {
                 advance();
                 match(Names.SEP, Names.COD);
             }
-            else
-                throw new SyntaxError("Colchetes nao aberto");
         }
         else
             throw new SyntaxError("Tipo da variavel mal definido");
@@ -176,8 +173,6 @@ public class Parser {
             match(Names.ID);
             varDeclOpt();
         }
-        else
-              throw new SyntaxError("Variavel seguinte de mesmo tipo nao definida");
     }
 
     public void type()
@@ -194,8 +189,6 @@ public class Parser {
     {
         if (lToken.getName() == Names.CONSTRUCTOR)
             constructDeclList();
-        else
-             throw new SyntaxError("Construtor nao definido");
     }
     public void constructDeclList() // Esse metodo e o de baixo sao realmente necessarios ?
     {
@@ -237,8 +230,6 @@ public class Parser {
          {
              methodDeclList();
          }
-         else   
-            throw new SyntaxError("Tipo de variavel nao definido");
     }
     public void methodDeclList()
     {
