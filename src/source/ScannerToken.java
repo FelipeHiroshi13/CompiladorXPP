@@ -41,6 +41,7 @@ public class ScannerToken {
     {   
         Token token = new Token();
         token.setLength(input.length());
+        System.out.println(input.length());
         whiteSpace.isWhiteSpace(input, this);
         token.setLine(whiteSpace.getLineCount());
         

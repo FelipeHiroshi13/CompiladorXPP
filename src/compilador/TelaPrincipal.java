@@ -153,8 +153,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 .addGap(3, 3, 3)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -164,6 +164,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         entrada  = jTextAreaCodigo.getText();
         AnalisadorLexico lexico = new AnalisadorLexico(entrada);
         lexico.Tokens(this);
+        System.out.println("");
         AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico(lexico.tokenList);
         if(!lexico.erroLexico)
             analisadorSintatico.inicia(this);
