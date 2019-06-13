@@ -91,7 +91,8 @@ public class Parser {
     
     public void classBody()
     {
-        if(lToken.getName() == Names.CHE){
+        if(lToken.getAttribute()== Names.CHE){
+            System.out.println("oioi");
             advance();
             varDeclListOpt();
             constructDeclListOpt();
@@ -146,7 +147,7 @@ public class Parser {
         if(lToken.isVariableType(lToken))
         {
             advance();
-            if (lToken.getName() == Names.COE) 
+            if (lToken.getAttribute()== Names.COE) 
             {
                 advance();
                 match(Names.COD);
@@ -163,7 +164,7 @@ public class Parser {
     
     public void varDeclOpt()
     {
-        if (lToken.getName() == Names.VIR)
+        if (lToken.getAttribute()== Names.VIR)
         {
             advance();
             match(Names.ID);
@@ -204,7 +205,7 @@ public class Parser {
     
      public void constructDeclListLinha()
     {
-        if (lToken.getName() == Names.CONSTRUCTOR)
+        if (lToken.getAttribute()== Names.CONSTRUCTOR)
         {
             constructDecl();
             constructDeclListLinha();
@@ -267,7 +268,7 @@ public class Parser {
     }
     public void methodDeclLinha()
     {
-        if (lToken.getName() == Names.COE) 
+        if (lToken.getAttribute()== Names.COE) 
         {
             advance();
             match(Names.COD);
@@ -277,7 +278,7 @@ public class Parser {
     }
     public void methodBody()
     {
-        if (lToken.getName() == Names.PE) 
+        if (lToken.getAttribute() == Names.PE) 
         {
             match(Names.PE);
             paramListOpt();
@@ -310,7 +311,7 @@ public class Parser {
     
      public void paramListLinha()
     {
-        if (lToken.getName() == Names.VIR)
+        if (lToken.getAttribute() == Names.VIR)
         {
             match(Names.VIR);
             param();
@@ -334,7 +335,7 @@ public class Parser {
     
     public void paramLinha()
     {
-        if (lToken.getName() == Names.COE)
+        if (lToken.getAttribute() == Names.COE)
         {
             advance();
             match(Names.COD);
@@ -344,7 +345,7 @@ public class Parser {
     
     public void statementsOpt()
     {
-        if (lToken.getName() == Names.ID || lToken.getName() == Names.POINTV)
+        if (lToken.getName() == Names.ID || lToken.getAttribute() == Names.POINTV)
         {
             statements();
         }
@@ -354,7 +355,7 @@ public class Parser {
     public void statements()
     {
         
-        if (lToken.getName() == Names.ID || lToken.getName() == Names.POINTV)
+        if (lToken.getName() == Names.ID || lToken.getAttribute() == Names.POINTV)
         {
             statement();
             statementsLinha();
@@ -363,7 +364,7 @@ public class Parser {
     
     public void statementsLinha()
     {
-        if (lToken.getName() == Names.ID || lToken.getName() == Names.POINTV)
+        if (lToken.getName() == Names.ID || lToken.getAttribute() == Names.POINTV)
         {
             statement();
         }
@@ -412,11 +413,11 @@ public class Parser {
     }
     public void atribStatLinha()
     {
-        if (lToken.getName() == Names.PLUS)
+        if (lToken.getAttribute() == Names.PLUS)
         {
             expression();
         }
-        else if (lToken.getName() == Names.NEW)
+        else if (lToken.getName()== Names.NEW)
         {
             allocExpression();
         }
@@ -515,7 +516,7 @@ public class Parser {
     }
     public void expressionOpt()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		expression();
         }
@@ -529,7 +530,7 @@ public class Parser {
     }
     public void lValueLinha()
     {
-    	if (lToken.getName() == Names.COE)
+    	if (lToken.getAttribute() == Names.COE)
         {
     		advance();
     		expression();
@@ -539,7 +540,7 @@ public class Parser {
     }
     public void lValueComp()
     {
-    	if (lToken.getName() == Names.POINT)
+    	if (lToken.getAttribute() == Names.POINT)
         {
     		advance();
     		match(Names.ID);
@@ -548,7 +549,7 @@ public class Parser {
     }
     public void lValueCompLinha()
     {
-    	if (lToken.getName() == Names.COE)
+    	if (lToken.getAttribute() == Names.COE)
         {
     		advance();
     		expression();
@@ -558,7 +559,7 @@ public class Parser {
     }
     public void expression()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		numExpression();
     		expressionLinha();
@@ -590,7 +591,7 @@ public class Parser {
     }
     public void numExpression()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		term();
     		numExpressionLinha();
@@ -599,7 +600,7 @@ public class Parser {
     
     public void numExpressionLinha()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		advance();
     		term();
@@ -609,7 +610,7 @@ public class Parser {
     
     public void term()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		advance();
     		unaryExpression();
@@ -618,7 +619,7 @@ public class Parser {
     }
     public void termLinha()
     {
-    	if (lToken.getName() == Names.MULT || lToken.getName() == Names.DIV || lToken.getName() == Names.MOD)
+    	if (lToken.getAttribute() == Names.MULT || lToken.getAttribute() == Names.DIV || lToken.getAttribute() == Names.MOD)
         {
     		advance();
     		unaryExpression();
@@ -626,7 +627,7 @@ public class Parser {
     }
     public void unaryExpression()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		advance();
     		factor();
@@ -657,7 +658,7 @@ public class Parser {
     }
     public void argListOpt()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getName() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		advance();
     		argList();
@@ -665,7 +666,7 @@ public class Parser {
     }
     public void argList()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		expression();
     		argListLinha();
@@ -673,7 +674,7 @@ public class Parser {
     }
     public void argListLinha()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getName() == Names.MINUS)
+    	if (lToken.getName() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
     		advance();
     		argList();
