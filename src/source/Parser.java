@@ -164,7 +164,6 @@ public class Parser {
         }
         else
             throw new SyntaxError("Tipo da variavel mal definido");
-        
         match(Names.ID);
         varDeclOpt();
     }
