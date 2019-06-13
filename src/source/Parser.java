@@ -31,6 +31,13 @@ public class Parser {
             throw new SyntaxError("Identificador esperado");
     }
     
+     private void match (Names tokenName, Names tokenAtributo){
+        if(lToken.getAttribute()== tokenAtributo)
+            advance();
+        else
+            throw new SyntaxError("Identificador esperado");
+    }
+    
     public void program() throws SyntaxError
     {
         lToken = tokenList.get(0);
@@ -97,7 +104,7 @@ public class Parser {
             varDeclListOpt();
             constructDeclListOpt();
             methodDeclListOpt();
-            match(Names.CHD);
+            match(Names.SEP, Names.CHD);
         }
         else
            throw new SyntaxError("Inicio do bloco da classe nao definido");
@@ -147,10 +154,11 @@ public class Parser {
         if(lToken.isVariableType(lToken))
         {
             advance();
+            System.out.println(lToken.getAttribute());
             if (lToken.getAttribute()== Names.COE) 
             {
                 advance();
-                match(Names.COD);
+                match(Names.SEP, Names.COD);
             }
             else
                 throw new SyntaxError("Colchetes nao aberto");
@@ -271,7 +279,7 @@ public class Parser {
         if (lToken.getAttribute()== Names.COE) 
         {
             advance();
-            match(Names.COD);
+            match(Names.SEP, Names.COD);
         }
         match(Names.ID);
         methodBody();
@@ -280,12 +288,12 @@ public class Parser {
     {
         if (lToken.getAttribute() == Names.PE) 
         {
-            match(Names.PE);
+            match(Names.SEP, Names.PE);
             paramListOpt();
-            match(Names.PD);
-            match(Names.COE);
+            match(Names.SEP, Names.PD);
+            match(Names.SEP, Names.COE);
             statementsOpt();
-            match(Names.COD);
+            match(Names.SEP, Names.COD);
         }
         else   
             throw new SyntaxError("Parenteses nao aberto");
@@ -313,7 +321,7 @@ public class Parser {
     {
         if (lToken.getAttribute() == Names.VIR)
         {
-            match(Names.VIR);
+            match(Names.SEP, Names.VIR);
             param();
             paramListLinha();
         }
@@ -338,7 +346,7 @@ public class Parser {
         if (lToken.getAttribute() == Names.COE)
         {
             advance();
-            match(Names.COD);
+            match(Names.SEP, Names.COD);
         }
         match(Names.ID);
     }
@@ -392,10 +400,10 @@ public class Parser {
         else if(lToken.getName() == Names.BREAK)
         {
         	advance();
-        	match(Names.POINTV);
+        	match(Names.SEP, Names.POINTV);
         }
         else
-        	match(Names.POINTV);
+        	match(Names.SEP, Names.POINTV);
         
    
     }
@@ -404,7 +412,7 @@ public class Parser {
         if (lToken.getName() == Names.ID)
         {
             lValue();
-            match(Names.EQUALS);
+            match(Names.RELOP, Names.EQUALS);
             atribStatLinha();
         }
         else
@@ -458,9 +466,9 @@ public class Parser {
     {
         if (lToken.getName() == Names.SUPER)
         {
-            match(Names.PE);
+            match(Names.SEP, Names.PE);
             argListOpt();
-            match(Names.PD);
+            match(Names.SEP, Names.PD);
         }
         else
             throw new SyntaxError("Comando nao reconhecido");
@@ -470,12 +478,12 @@ public class Parser {
         if (lToken.getName() == Names.IF)
         {
             advance();
-            match(Names.PE);
+            match(Names.SEP, Names.PE);
             expression();
-            match(Names.PD);
-            match(Names.CHE);
+            match(Names.SEP,Names.PD);
+            match(Names.SEP,Names.CHE);
             statements();
-            match(Names.CHD);
+            match(Names.SEP,Names.CHD);
             ifStatLinha();
         }
         else
@@ -485,9 +493,9 @@ public class Parser {
     {
     	 if (lToken.getName() == Names.ELSE)
          {
-    		 match(Names.CHE);
+    		 match(Names.SEP,Names.CHE);
     		 statements();
-    		 match(Names.CHD);
+    		 match(Names.SEP,Names.CHD);
          }
     }
     public void forStat()
@@ -495,16 +503,16 @@ public class Parser {
     	if (lToken.getName() == Names.FOR)
         {
     		advance();
-    		match(Names.PE);
+    		match(Names.SEP,Names.PE);
     		atribStatOpt();
-    		match(Names.POINTV);
+    		match(Names.SEP,Names.POINTV);
     		expressionOpt();
-    		match(Names.POINTV);
+    		match(Names.SEP,Names.POINTV);
     		atribStatOpt();
-    		match(Names.PD);
-    		match(Names.CHE);
+    		match(Names.SEP,Names.PD);
+    		match(Names.SEP,Names.CHE);
     		statements();
-    		match(Names.CHD);
+    		match(Names.SEP,Names.CHD);
         }
     }
     public void atribStatOpt()
@@ -534,7 +542,7 @@ public class Parser {
         {
     		advance();
     		expression();
-    		match(Names.COD);
+    		match(Names.SEP,Names.COD);
         }
     	lValueComp();
     }
@@ -553,7 +561,7 @@ public class Parser {
         {
     		advance();
     		expression();
-    		match(Names.COD);
+    		match(Names.SEP,Names.COD);
         }
     	lValueComp();
     }
@@ -577,16 +585,16 @@ public class Parser {
         {
     		advance();
     		match(Names.ID);
-    		match(Names.PE);
+    		match(Names.SEP,Names.PE);
     		argListOpt();
-    		match(Names.PD);
+    		match(Names.SEP,Names.PD);
         }
     	else if(lToken.isVariableType(lToken))
     	{
     		advance();
-    		match(Names.COE);
+    		match(Names.SEP,Names.COE);
     		expression();
-    		match(Names.COD);
+    		match(Names.SEP,Names.COD);
     	}
     }
     public void numExpression()
@@ -651,9 +659,9 @@ public class Parser {
         }
     	else
     	{
-    		match(Names.PE);
+    		match(Names.SEP,Names.PE);
     		expression();
-    		match(Names.PD);
+    		match(Names.SEP,Names.PD);
     	}
     }
     public void argListOpt()
@@ -678,7 +686,7 @@ public class Parser {
         {
     		advance();
     		argList();
-    		match(Names.VIR);
+    		match(Names.SEP,Names.VIR);
         }
     }
 
