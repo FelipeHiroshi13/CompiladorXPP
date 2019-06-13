@@ -9,10 +9,16 @@ import compilador.AnalisadorLexico;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.stage.FileChooser;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import jdk.jfr.events.FileWriteEvent;
 
 /**
  *
@@ -25,6 +31,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public String entrada;
     public StringWriter sw;
+    private File file;
     
     public TelaPrincipal() {
         super("Compilador X++");
@@ -53,7 +60,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItemNew = new javax.swing.JMenuItem();
         jMenuItemSave = new javax.swing.JMenuItem();
         jMenuItemOpen = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -81,13 +88,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        jMenuItem1.setText("New");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItemNew.setText("New");
+        jMenuItemNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jMenuItemNewActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(jMenuItemNew);
 
         jMenuItemSave.setText("Save");
         jMenuItemSave.addActionListener(new java.awt.event.ActionListener() {
@@ -168,18 +175,45 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jTextAreaConsole.setText(string);
     }
             
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+        jTextAreaCodigo.setText("");
+        file = null;
+    }//GEN-LAST:event_jMenuItemNewActionPerformed
 
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
-        
+        if (file == null){
+            JFileChooser salvarArquivo = new JFileChooser();
+            if (salvarArquivo.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File salvar = salvarArquivo.getSelectedFile();
+                try {
+                    FileWriter fileWriter = new FileWriter(salvar);
+                    String texto = jTextAreaCodigo.getText();
+                    fileWriter.write(texto);
+                    fileWriter.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }else{
+            FileWriter fileWriter;
+            try {
+                fileWriter = new FileWriter(file);
+                String texto = jTextAreaCodigo.getText();
+                fileWriter.write(texto);
+                fileWriter.close();
+            } catch (IOException ex) {
+                Logger.getLogger(TelaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
     }//GEN-LAST:event_jMenuItemSaveActionPerformed
 
     private void jMenuItemOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemOpenActionPerformed
         JFileChooser chooser = new JFileChooser();
         chooser.showOpenDialog(this);
         File f = chooser.getSelectedFile();
+        file = f;
         String filename = f.getAbsolutePath();
         
         try
@@ -195,6 +229,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jMenuItemOpenActionPerformed
 
+    
     /**
      * @param args the command line arguments
      */
@@ -237,7 +272,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItemNew;
     private javax.swing.JMenuItem jMenuItemOpen;
     private javax.swing.JMenuItem jMenuItemSave;
     private javax.swing.JScrollPane jScrollPane1;
