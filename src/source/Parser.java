@@ -41,11 +41,12 @@ public class Parser {
     public void program() throws SyntaxError
     {
         lToken = tokenList.get(0);
+        System.out.println("--->" + lToken.getName());
         if(lToken.getName() == Names.CLASS)
         {
             classList();               
         }
-        else
+        else if (lToken.getName() != Names.EOF)
         {
             throw new SyntaxError("Classe mal definida");
         }
@@ -99,7 +100,7 @@ public class Parser {
             advance();
             varDeclListOpt();
             constructDeclListOpt();
-           
+            
             methodDeclListOpt();
             match(Names.SEP, Names.CHD);
         }
@@ -135,15 +136,14 @@ public class Parser {
     
     public void varDecl()
     {
-        
         this.type();
-        varDeclLinha();
-        
+        varDeclLinha();   
     }
     
     public void varDeclLinha()
     {
         this.type();
+        System.out.println("-->" + lToken.getAttribute());
         if(lToken.isVariableType(lToken))
         {
             if (lToken.getAttribute()== Names.COE) 
@@ -152,6 +152,8 @@ public class Parser {
                 match(Names.SEP, Names.COD);
             }
         }
+        System.out.println("-->" + lToken.getName());
+        System.out.println("-->" + lToken.getAttribute());
         match(Names.ID);
         varDeclOpt();
     }
