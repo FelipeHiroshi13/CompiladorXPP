@@ -122,5 +122,4 @@ public class Token
         return false;
     }
 
-    
 }

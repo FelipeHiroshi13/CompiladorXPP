@@ -5,6 +5,7 @@
  */
 package source;
 
+import compilador.AnalisadorSintatico;
 import java.util.List;
 
 /**
@@ -28,14 +29,14 @@ public class Parser {
         if(lToken.getName() == tokenCodigo)
             advance();
         else
-            throw new SyntaxError("Identificador esperado: " + tokenCodigo + "\nMas foi o: " + lToken.getName());
+            throw new SyntaxError("Identificador esperado: " + AnalisadorSintatico.debug.get(tokenCodigo) + "\nNo lugar de: " + AnalisadorSintatico.debug.get(lToken.getName()));
     }
     
      private void match (Names tokenName, Names tokenAtributo){
         if(lToken.getAttribute()== tokenAtributo)
             advance();
         else
-            throw new SyntaxError("Esperava o atributo " + tokenAtributo + "\nMas foi o " +  lToken.getAttribute());
+            throw new SyntaxError("Esperava o atributo " + AnalisadorSintatico.debug.get(tokenAtributo) + "\nNo lugar de: " +  AnalisadorSintatico.debug.get(lToken.getAttribute()));
     }
     
     public void program() throws SyntaxError

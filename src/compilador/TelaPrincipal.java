@@ -5,7 +5,6 @@
  */
 package compilador;
 
-import com.sun.javafx.scene.text.TextLine;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.File;
@@ -17,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import source.TextLineNumber;
 
 /**
