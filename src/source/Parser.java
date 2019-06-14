@@ -76,7 +76,7 @@ public class Parser {
         if (lToken.getAttribute() == Names.CLASS)
         {            
             advance();
-            match(Names.ID);
+            match(Names.ID, Names.ID);
             classDeclLinha();
         }
         else
@@ -89,7 +89,7 @@ public class Parser {
         if (lToken.getAttribute() == Names.EXTENDS)
         {
             advance();
-            match(Names.ID);
+            match(Names.ID, Names.ID);
         }
         classBody();
 
@@ -149,7 +149,7 @@ public class Parser {
             match(Names.SEP, Names.COD);
         }
         
-        match(Names.ID);
+        match(Names.ID, Names.ID);
         varDeclOpt();
         if(lToken.getAttribute() != Names.PE)
             match(Names.SEP, Names.POINTV);
@@ -329,7 +329,7 @@ public class Parser {
             advance();
             match(Names.SEP, Names.COD);
         }
-        match(Names.ID);
+        match(Names.ID, Names.ID);
     }
     
     public void statementsOpt()
