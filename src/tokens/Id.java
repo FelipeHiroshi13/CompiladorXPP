@@ -40,7 +40,6 @@ public class Id extends Token implements TokenDefine{
         reserved.put("new", Names.NEW);
         reserved.put("constructor", Names.CONSTRUCTOR);
         reserved.put("type", Names.TYPE);
-        reserved.put("string", Names.STRING);
     }
     public List<String> idList = new ArrayList<String>();
     
@@ -76,6 +75,8 @@ public class Id extends Token implements TokenDefine{
         if(reserved.containsKey(input))
         {
             lToken.setAttribute(reserved.get(input));
+        }else{
+            lToken.setAttribute(Names.ID);
         }
     }
 

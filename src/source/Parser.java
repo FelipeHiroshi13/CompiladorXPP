@@ -183,14 +183,14 @@ public class Parser {
     public void constructDeclListOpt()
     {
       
-        if (lToken.getName() == Names.CONSTRUCTOR)
+        if (lToken.getAttribute() == Names.CONSTRUCTOR)
             constructDeclList();
     }
     public void constructDeclList() // Esse metodo e o de baixo sao realmente necessarios ?
     {
        
         constructDecl();
-        if (lToken.getName() == Names.CONSTRUCTOR)
+        if (lToken.getAttribute()== Names.CONSTRUCTOR)
         {
             constructDeclListLinha();
         }
@@ -214,7 +214,7 @@ public class Parser {
        
         if (lToken.getAttribute() == Names.CONSTRUCTOR)
         {
-            match(Names.CONSTRUCTOR);
+            match(Names.ID, Names.CONSTRUCTOR);
             methodBody();
         }
       
@@ -335,6 +335,7 @@ public class Parser {
     {
         if (lToken.getName() == Names.ID || lToken.getAttribute() == Names.POINTV)
         {
+            System.out.println("oiiiiiiii");
             statements();
         }
         else
@@ -361,9 +362,10 @@ public class Parser {
      
     public void statement()    
     {
+        System.out.println("77777" + lToken.getAttribute());
         if(lToken.isVariableType(lToken))
             varDeclList();  
-        else if(lToken.getName() == Names.ID)
+        else if(lToken.getAttribute() == Names.ID)
             atribStat();
         else if(lToken.getAttribute() == Names.PRINT)
             printStat();
@@ -376,7 +378,8 @@ public class Parser {
         else if(lToken.getAttribute() == Names.IF)
         	ifStat();
         else if(lToken.getAttribute() == Names.FOR)
-        	forStat();
+                forStat();
+        	
         else if(lToken.getAttribute() == Names.BREAK)
         {
         	advance();
@@ -389,10 +392,10 @@ public class Parser {
     }
     public void atribStat()
     {
-        if (lToken.getName() == Names.ID)
+        if (lToken.getAttribute() == Names.ID)
         {
             lValue();
-            match(Names.RELOP, Names.EQUALS);
+            match(Names.RELOP, Names.EQ);
             atribStatLinha();
         }
        
@@ -412,7 +415,7 @@ public class Parser {
     }
     public void printStat()
     {
-        if (lToken.getName() == Names.PRINT)
+        if (lToken.getAttribute() == Names.PRINT)
         {
             advance();
             expression();
@@ -421,7 +424,7 @@ public class Parser {
     }
     public void readStat()
     {
-        if (lToken.getName() == Names.READ)
+        if (lToken.getAttribute() == Names.READ)
         {
             System.out.println("oioioi" + lToken.getName());
             advance();
@@ -431,7 +434,7 @@ public class Parser {
     }
     public void returnStat()
     {
-        if (lToken.getName() == Names.RETURN)
+        if (lToken.getAttribute() == Names.RETURN)
         {
             advance();
             expression();
@@ -440,7 +443,7 @@ public class Parser {
     }
     public void superStat()
     {
-        if (lToken.getName() == Names.SUPER)
+        if (lToken.getAttribute() == Names.SUPER)
         {
             match(Names.SEP, Names.PE);
             argListOpt();
@@ -450,7 +453,7 @@ public class Parser {
     }
     public void ifStat()
     {
-        if (lToken.getName() == Names.IF)
+        if (lToken.getAttribute() == Names.IF)
         {
             advance();
             match(Names.SEP, Names.PE);
@@ -465,7 +468,7 @@ public class Parser {
     }
     public void ifStatLinha()
     {
-    	 if (lToken.getName() == Names.ELSE)
+    	 if (lToken.getAttribute() == Names.ELSE)
          {
     		 match(Names.SEP,Names.CHE);
     		 statements();
@@ -474,11 +477,13 @@ public class Parser {
     }
     public void forStat()
     {
-    	if (lToken.getName() == Names.FOR)
+    	if (lToken.getAttribute() == Names.FOR)
         {
+                System.out.println("ooioioi");
     		advance();
     		match(Names.SEP,Names.PE);
     		atribStatOpt();
+                System.out.println("LEGAL");
     		match(Names.SEP,Names.POINTV);
     		expressionOpt();
     		match(Names.SEP,Names.POINTV);
@@ -487,11 +492,12 @@ public class Parser {
     		match(Names.SEP,Names.CHE);
     		statements();
     		match(Names.SEP,Names.CHD);
+                System.out.println("LEGAL");
         }
     }
     public void atribStatOpt()
     {
-    	if (lToken.getName() == Names.ID)
+    	if (lToken.getAttribute() == Names.ID)
         {
     		atribStat();
         }
