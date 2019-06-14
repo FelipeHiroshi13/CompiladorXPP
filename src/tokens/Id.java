@@ -75,7 +75,7 @@ public class Id extends Token implements TokenDefine{
     public void isReserved(String input, Token lToken){
         if(reserved.containsKey(input))
         {
-            lToken.setName(reserved.get(input));
+            lToken.setAttribute(reserved.get(input));
         }
     }
 

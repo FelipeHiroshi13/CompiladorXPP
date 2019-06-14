@@ -42,7 +42,7 @@ public class Parser {
     {
         lToken = tokenList.get(0);
         System.out.println("--->" + lToken.getName());
-        if(lToken.getName() == Names.CLASS)
+        if(lToken.getAttribute()== Names.CLASS)
         {
             classList();               
         }
@@ -54,7 +54,7 @@ public class Parser {
     
     public void classList() 
     {
-        if (lToken.getName() == Names.CLASS)
+        if (lToken.getAttribute() == Names.CLASS)
         {
             classDecl();
             classListLinha();
@@ -64,7 +64,7 @@ public class Parser {
     
     public void classListLinha()
     {
-        if(lToken.getName() == Names.CLASS)
+        if(lToken.getAttribute() == Names.CLASS)
         {
             classList();               
         } 
@@ -72,7 +72,7 @@ public class Parser {
     
     public void classDecl() 
     {
-        if (lToken.getName() == Names.CLASS)
+        if (lToken.getAttribute() == Names.CLASS)
         {            
             advance();
             match(Names.ID);
@@ -85,7 +85,7 @@ public class Parser {
     
     public void classDeclLinha()
     {
-        if (lToken.getName() == Names.EXTENDS)
+        if (lToken.getAttribute() == Names.EXTENDS)
         {
             advance();
             match(Names.ID);
@@ -212,7 +212,7 @@ public class Parser {
     public void constructDecl()
     {
        
-        if (lToken.getName() == Names.CONSTRUCTOR)
+        if (lToken.getAttribute() == Names.CONSTRUCTOR)
         {
             match(Names.CONSTRUCTOR);
             methodBody();
@@ -277,6 +277,7 @@ public class Parser {
             match(Names.SEP, Names.CHE);
             System.out.println("=====>" + lToken.getAttribute());
             statementsOpt();
+            System.out.println("===>" + lToken.getName());
             match(Names.SEP, Names.CHD);
         }
      
@@ -364,19 +365,19 @@ public class Parser {
             varDeclList();  
         else if(lToken.getName() == Names.ID)
             atribStat();
-        else if(lToken.getName() == Names.PRINT)
+        else if(lToken.getAttribute() == Names.PRINT)
             printStat();
-        else if(lToken.getName() == Names.ID)
+        else if(lToken.getAttribute() == Names.READ)
         	readStat();
-        else if(lToken.getName() == Names.RETURN)
+        else if(lToken.getAttribute() == Names.RETURN)
         	returnStat();
-        else if(lToken.getName() == Names.SUPER)
+        else if(lToken.getAttribute() == Names.SUPER)
         	superStat();
-        else if(lToken.getName() == Names.IF)
+        else if(lToken.getAttribute() == Names.IF)
         	ifStat();
-        else if(lToken.getName() == Names.FOR)
+        else if(lToken.getAttribute() == Names.FOR)
         	forStat();
-        else if(lToken.getName() == Names.BREAK)
+        else if(lToken.getAttribute() == Names.BREAK)
         {
         	advance();
         	match(Names.SEP, Names.POINTV);
@@ -422,6 +423,7 @@ public class Parser {
     {
         if (lToken.getName() == Names.READ)
         {
+            System.out.println("oioioi" + lToken.getName());
             advance();
             lValue();
         }
