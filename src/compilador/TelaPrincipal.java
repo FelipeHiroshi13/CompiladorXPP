@@ -32,12 +32,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private File file;
   
     public TelaPrincipal() {
-        super("Compilador X++");
+        super("Compilador XPP");
         initComponents();
         TextLineNumber lineNumber = new TextLineNumber(jTextAreaCodigo);
         lineNumber.setCurrentLineForeground(Color.BLACK);
         jScrollPane1.setRowHeaderView(lineNumber);
-       
+        lblNomeArquivo.setText("(Untitled.xxp)");
     }
 
     public TelaPrincipal(String entrada){
@@ -60,12 +60,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jTextAreaConsole = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        lblNomeArquivo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItemNew = new javax.swing.JMenuItem();
         jMenuItemSave = new javax.swing.JMenuItem();
         jMenuItemOpen = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +87,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jLabel1.setText("Código");
 
         jLabel2.setText("Console");
+
+        lblNomeArquivo.setText("jLabel3");
 
         jMenu1.setText("File");
 
@@ -116,9 +118,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,6 +139,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addComponent(jScrollPane1)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblNomeArquivo)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(71, 71, 71))))
         );
@@ -147,7 +148,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblNomeArquivo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -181,7 +184,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewActionPerformed
         // TODO add your handling code here:
         jTextAreaCodigo.setText("");
+        lblNomeArquivo.setText("(Untitled.xxp)");
         file = null;
+        
     }//GEN-LAST:event_jMenuItemNewActionPerformed
 
     private void jMenuItemSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSaveActionPerformed
@@ -217,6 +222,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         chooser.showOpenDialog(this);
         File f = chooser.getSelectedFile();
         file = f;
+        lblNomeArquivo.setText("("+ f.getName()+")");
         String filename = f.getAbsolutePath();
         
         try
@@ -273,7 +279,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItemNew;
     private javax.swing.JMenuItem jMenuItemOpen;
@@ -282,5 +287,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextAreaCodigo;
     private javax.swing.JTextArea jTextAreaConsole;
+    private javax.swing.JLabel lblNomeArquivo;
     // End of variables declaration//GEN-END:variables
 }

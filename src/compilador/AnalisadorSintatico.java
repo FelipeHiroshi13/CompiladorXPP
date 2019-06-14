@@ -72,7 +72,7 @@ public class AnalisadorSintatico {
         debug.put(Names.COE, "[");
         debug.put(Names.COD, "]");
         debug.put(Names.PE, "(");
-        debug.put(Names.PD, "}");
+        debug.put(Names.PD, ")");
         debug.put(Names.POINT, ".");
         debug.put(Names.POINTV, ";");
         debug.put(Names.TWOPOINTS, ":");

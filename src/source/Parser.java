@@ -466,6 +466,7 @@ public class Parser {
     {
         if (lToken.getAttribute() == Names.SUPER)
         {
+            advance();
             match(Names.SEP, Names.PE);
             argListOpt();
             match(Names.SEP, Names.PD);
@@ -491,9 +492,10 @@ public class Parser {
     {
     	 if (lToken.getAttribute() == Names.ELSE)
          {
-    		 match(Names.SEP,Names.CHE);
-    		 statements();
-    		 match(Names.SEP,Names.CHD);
+                advance();
+    		match(Names.SEP,Names.CHE);
+    		statements();
+    		match(Names.SEP,Names.CHD);
          }
     }
     public void forStat()
@@ -541,8 +543,9 @@ public class Parser {
     }
     public void lValue()
     {
-    	if (lToken.getName() == Names.ID)
+    	if (lToken.getAttribute()== Names.ID)
         {
+                System.out.println("olaaaa");
                 match(Names.ID);
     		lValueLinha();
         }
@@ -659,6 +662,7 @@ public class Parser {
     }
     public void factor()
     {
+        
     	if (lToken.getName() == Names.INTEGER_LITERAL)
         {
     		advance();
@@ -668,7 +672,7 @@ public class Parser {
         {
     		advance();
         }
-    	else if (lToken.getName() == Names.ID)
+    	else if (lToken.getAttribute()== Names.ID)
         {
     		advance();
     		lValue();
@@ -682,9 +686,8 @@ public class Parser {
     }
     public void argListOpt()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
+    	if (lToken.getAttribute()== Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
-    		advance();
     		argList();
         }
     }
