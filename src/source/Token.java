@@ -105,6 +105,22 @@ public class Token
         else
             return false;
     }
+    
+    public boolean IsStatementType(Token lToken)
+    {
+        if(isVariableType(lToken) || lToken.getAttribute() == Names.PRINT 
+            || lToken.getAttribute() == Names.READ
+            || lToken.getAttribute() == Names.RETURN
+            || lToken.getAttribute() == Names.SUPER
+            || lToken.getAttribute() == Names.IF
+            || lToken.getAttribute() == Names.FOR
+            || lToken.getAttribute() == Names.BREAK
+            || lToken.getAttribute() == Names.POINTV)
+        {
+            return true;
+        }
+        return false;
+    }
 
     
 }

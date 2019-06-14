@@ -344,7 +344,7 @@ public class Parser {
     public void statements()
     {
         
-        if (lToken.getName() == Names.ID || lToken.getAttribute() == Names.POINTV)
+        if (lToken.IsStatementType(lToken))
         {
             statement();
             statementsLinha();
@@ -364,17 +364,34 @@ public class Parser {
     {
         System.out.println("77777" + lToken.getAttribute());
         if(lToken.isVariableType(lToken))
+        {
             varDeclList();  
+        }
         else if(lToken.getAttribute() == Names.ID)
+        {
             atribStat();
+            match(Names.SEP, Names.POINTV);
+        }
         else if(lToken.getAttribute() == Names.PRINT)
+        {
             printStat();
+            match(Names.SEP, Names.POINTV);
+        }
         else if(lToken.getAttribute() == Names.READ)
-        	readStat();
+        {
+            readStat();
+            match(Names.SEP, Names.POINTV);
+        }
         else if(lToken.getAttribute() == Names.RETURN)
-        	returnStat();
+        {
+            returnStat();
+            match(Names.SEP, Names.POINTV);
+        }
         else if(lToken.getAttribute() == Names.SUPER)
-        	superStat();
+        {
+            superStat();
+            match(Names.SEP, Names.POINTV);
+        }
         else if(lToken.getAttribute() == Names.IF)
         	ifStat();
         else if(lToken.getAttribute() == Names.FOR)
@@ -385,9 +402,11 @@ public class Parser {
         	advance();
         	match(Names.SEP, Names.POINTV);
         }
-        else
-        	match(Names.SEP, Names.POINTV);
         
+         else if(lToken.getAttribute() == Names.POINTV)
+        	match(Names.SEP, Names.POINTV);
+         else 
+                throw new SyntaxError("Statement mal formado");
    
     }
     public void atribStat()
@@ -403,11 +422,11 @@ public class Parser {
     }
     public void atribStatLinha()
     {
-        if (lToken.getAttribute() == Names.PLUS)
+        if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
             expression();
         }
-        else if (lToken.getName()== Names.NEW)
+        else if (lToken.getName()== Names.NEW || lToken.isVariableType(lToken))
         {
             allocExpression();
         }
@@ -479,21 +498,17 @@ public class Parser {
     {
     	if (lToken.getAttribute() == Names.FOR)
         {
-                System.out.println("ooioioi");
     		advance();
     		match(Names.SEP,Names.PE);
     		atribStatOpt();
     		match(Names.SEP,Names.POINTV);
     		expressionOpt();
-                System.out.println("---->");
-                System.out.println("--=>LEGAL");
     		match(Names.SEP,Names.POINTV);
     		atribStatOpt();
     		match(Names.SEP,Names.PD);
     		match(Names.SEP,Names.CHE);
     		statements();
     		match(Names.SEP,Names.CHD);
-                System.out.println("LEGAL");
         }
     }
     public void atribStatOpt()
@@ -558,8 +573,11 @@ public class Parser {
      public void expressionLinha()
     {
     	 //TODO:Verificar se eh relop
+        if(lToken.getName() == Names.RELOP)
+        {
     	 advance();
     	 numExpression();
+        }
     }
     public void allocExpression()
     {
@@ -602,8 +620,9 @@ public class Parser {
     {
     	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
-                System.out.println("olaaaa");
+                
     		advance();
+                System.out.println(lToken.getName());
     		unaryExpression();
     		termLinha();
         }
