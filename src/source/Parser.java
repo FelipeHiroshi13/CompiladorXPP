@@ -333,7 +333,7 @@ public class Parser {
     
     public void statementsOpt()
     {
-        if (lToken.getName() == Names.ID || lToken.getAttribute() == Names.POINTV)
+        if (lToken.IsStatementType(lToken))
         {
             System.out.println("oiiiiiiii");
             statements();
@@ -343,7 +343,7 @@ public class Parser {
     }
     public void statements()
     {
-        
+     
         if (lToken.IsStatementType(lToken))
         {
             statement();
@@ -353,7 +353,7 @@ public class Parser {
     
     public void statementsLinha()
     {
-        if (lToken.getName() == Names.ID || lToken.getAttribute() == Names.POINTV)
+        if (lToken.IsStatementType(lToken))
         {
             statement();
         }
@@ -375,6 +375,7 @@ public class Parser {
         else if(lToken.getAttribute() == Names.PRINT)
         {
             printStat();
+            System.out.println("PRINT CORNO" + lToken.getAttribute());
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.READ)
