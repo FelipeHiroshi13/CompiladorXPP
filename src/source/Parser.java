@@ -136,26 +136,22 @@ public class Parser {
     
     public void varDecl()
     {
-        this.type();
+        type();
         varDeclLinha();   
     }
     
     public void varDeclLinha()
     {
-        this.type();
-        System.out.println("-->" + lToken.getAttribute());
-        if(lToken.isVariableType(lToken))
+     
+        if (lToken.getAttribute()== Names.COE) 
         {
-            if (lToken.getAttribute()== Names.COE) 
-            {
-                advance();
-                match(Names.SEP, Names.COD);
-            }
+            advance();
+            match(Names.SEP, Names.COD);
         }
-        System.out.println("-->" + lToken.getName());
-        System.out.println("-->" + lToken.getAttribute());
+        
         match(Names.ID);
         varDeclOpt();
+        match(Names.SEP, Names.POINTV);
     }
     
     public void varDeclOpt()
