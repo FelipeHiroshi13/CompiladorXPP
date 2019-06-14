@@ -483,9 +483,10 @@ public class Parser {
     		advance();
     		match(Names.SEP,Names.PE);
     		atribStatOpt();
-                System.out.println("LEGAL");
     		match(Names.SEP,Names.POINTV);
     		expressionOpt();
+                System.out.println("---->");
+                System.out.println("--=>LEGAL");
     		match(Names.SEP,Names.POINTV);
     		atribStatOpt();
     		match(Names.SEP,Names.PD);
@@ -513,6 +514,7 @@ public class Parser {
     {
     	if (lToken.getName() == Names.ID)
         {
+                match(Names.ID);
     		lValueLinha();
         }
     }
@@ -600,6 +602,7 @@ public class Parser {
     {
     	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
+                System.out.println("olaaaa");
     		advance();
     		unaryExpression();
     		termLinha();
