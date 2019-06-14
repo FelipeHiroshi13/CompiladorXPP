@@ -63,7 +63,7 @@ public class Token
         return length;
     }
     
-    public int getLine(){
+    public static int getLine(){
         return line+1;
     }
     

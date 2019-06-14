@@ -32,7 +32,7 @@ public class SyntaxError extends RuntimeException
         super(str);
         msg = str;
         syntaxError = true;
-        telaPrincipal.jSetTextAreaConsole(msg);
+        telaPrincipal.jSetTextAreaConsole(msg + " Linha " + Token.getLine());
     }
     
     public String toString()

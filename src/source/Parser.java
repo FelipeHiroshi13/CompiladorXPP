@@ -100,7 +100,6 @@ public class Parser {
             advance();
             varDeclListOpt();
             constructDeclListOpt();
-            
             methodDeclListOpt();
             match(Names.SEP, Names.CHD);
         }
