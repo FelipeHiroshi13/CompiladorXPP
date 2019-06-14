@@ -271,9 +271,11 @@ public class Parser {
             match(Names.SEP, Names.PE);
             paramListOpt();
             match(Names.SEP, Names.PD);
-            match(Names.SEP, Names.COE);
+            System.out.println("=====>" + lToken.getAttribute());
+            match(Names.SEP, Names.CHE);
+            System.out.println("=====>" + lToken.getAttribute());
             statementsOpt();
-            match(Names.SEP, Names.COD);
+            match(Names.SEP, Names.CHD);
         }
      
     }
@@ -333,7 +335,7 @@ public class Parser {
             statements();
         }
         else
-            throw new SyntaxError();
+            ;
     }
     public void statements()
     {
