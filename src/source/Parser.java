@@ -150,7 +150,10 @@ public class Parser {
         
         match(Names.ID);
         varDeclOpt();
-        match(Names.SEP, Names.POINTV);
+        if(lToken.getAttribute() != Names.PE)
+            match(Names.SEP, Names.POINTV);
+        else
+            methodBody();
     }
     
     public void varDeclOpt()
