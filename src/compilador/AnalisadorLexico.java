@@ -33,7 +33,7 @@ public class AnalisadorLexico {
         do{
             token = scannerToken.nextToken();
             if(token.getName() == Names.UNDEF || token.getLexicalError() == true){
-                telaPrincipal.jSetTextAreaConsole("Erro Léxico na linha " + token.getLine());
+                telaPrincipal.jSetTextAreaConsole("Erro Léxico na linha " + Token.getLine());
                 erroLexico = true;
             }
             addTokenList(tokenList, token);
