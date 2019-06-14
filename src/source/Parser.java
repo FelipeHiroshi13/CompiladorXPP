@@ -499,15 +499,27 @@ public class Parser {
     	if (lToken.getAttribute() == Names.FOR)
         {
     		advance();
+                System.out.println("oioioi 1 " + lToken.getAttribute());
     		match(Names.SEP,Names.PE);
+                System.out.println("oioioi 2 " + lToken.getAttribute());
     		atribStatOpt();
-    		match(Names.SEP,Names.POINTV);
+                System.out.println("oioioi 3 " + lToken.getAttribute());
+                
+//                advance();
+    		
+                match(Names.SEP,Names.POINTV);
+                System.out.println("oioioi 4 " + lToken.getAttribute());
     		expressionOpt();
+                System.out.println("oioioi 5 " + lToken.getAttribute());
     		match(Names.SEP,Names.POINTV);
+                System.out.println("oioioi 6 " + lToken.getAttribute());
     		atribStatOpt();
+                System.out.println("oioioi 7 " + lToken.getAttribute());
     		match(Names.SEP,Names.PD);
     		match(Names.SEP,Names.CHE);
+                System.out.println("oioioi 8 " + lToken.getAttribute());
     		statements();
+                System.out.println("oioioi 9 " + lToken.getAttribute());
     		match(Names.SEP,Names.CHD);
         }
     }
@@ -621,8 +633,8 @@ public class Parser {
     	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
                 
-    		advance();
-                System.out.println(lToken.getName());
+//    		advance();
+//                System.out.println(lToken.getName());
     		unaryExpression();
     		termLinha();
         }
