@@ -29,6 +29,11 @@ public class Parser
         lToken = tokenList.get(position);
     }
     
+    private void back(){
+        position--;
+        lToken = tokenList.get(position);
+    }
+    
     private void match (Names tokenCodigo)
     {
         if(lToken.getName() == tokenCodigo)
@@ -172,6 +177,7 @@ public class Parser
     {
         if(lToken.isVariableType(lToken))
         {
+            System.out.println("variável" + lToken.getAttribute());
             type();
             varDeclLinha();
         }
@@ -184,13 +190,17 @@ public class Parser
     // ########################################## botar erro no vardeclinha ###############################
     public void varDeclLinha()
     {
-     
+        System.out.println("variável" + lToken.getAttribute());
         if (lToken.getAttribute()== Names.COE) 
         {
             advance();
             match(Names.SEP, Names.COD);
         }
-        
+        if(lToken.getAttribute() == Names.EQ){
+            back();
+            atribStat();
+            return;
+        }
         match(Names.ID, Names.ID);
         varDeclOpt();
         
@@ -216,7 +226,8 @@ public class Parser
         if(lToken.isVariableType(lToken))
         {
             System.out.println(lToken.getName());
-            System.out.println(lToken.getAttribute());
+            System.out.println(lToken.getAttribute() + " " + lToken.getLexeme());
+            
             advance();
         }
         else
@@ -332,6 +343,7 @@ public class Parser
     
     public void methodBody()
     {
+        System.out.println("Corpo método");
         if (lToken.getAttribute() == Names.PE) 
         {
             match(Names.SEP, Names.PE);
@@ -442,7 +454,7 @@ public class Parser
    
     public void statement()    
     {
-        System.out.println("77777" + lToken.getAttribute());
+        System.out.println("Statements " + lToken.getAttribute());
         if(lToken.isVariableType(lToken) && (this.nextToken(position + 1).getAttribute() == Names.ID || (this.nextToken(position + 1).getAttribute() == Names.COE && this.nextToken(position + 2).getAttribute() == Names.COD)))
         {
             varDeclList(); 
@@ -488,6 +500,7 @@ public class Parser
         }
         else if(lToken.getAttribute() == Names.POINTV)
         {
+            System.out.println("de");
             match(Names.SEP, Names.POINTV);
         }
         else
@@ -498,6 +511,7 @@ public class Parser
     
     public void atribStat()
     {
+        System.out.println("atribuiçã0 " + lToken.getAttribute());
         if (lToken.getAttribute() == Names.ID)
         {
             lValue();
@@ -664,7 +678,7 @@ public class Parser
     {
     	if (lToken.getAttribute()== Names.ID)
         {
-                System.out.println("olaaaa");
+                System.out.println("Lvalue " + lToken.getLexeme());
                 match(Names.ID);
     		lValueLinha();
         }else{
