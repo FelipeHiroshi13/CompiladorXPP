@@ -264,8 +264,15 @@ public class Parser {
             advance();
             match(Names.SEP, Names.COD);
         }
-        match(Names.ID);
-        methodBody();
+        if (lToken.getAttribute() == Names.ID)
+        {
+            match(Names.ID);
+            methodBody();
+        }
+        else
+        {
+            throw new SyntaxError("methodDeclLinha mal definido");
+        }
     }
     public void methodBody()
     {
@@ -281,14 +288,15 @@ public class Parser {
             System.out.println("===>" + lToken.getName());
             match(Names.SEP, Names.CHD);
         }
-     
+        else
+        {
+            throw new SyntaxError("methodBody mal definido");
+        }
     }
     public void paramListOpt()
     {
         if ((lToken.isVariableType(lToken)))
             paramList();
-      
-
     }
     public void paramList()
     {
@@ -297,7 +305,10 @@ public class Parser {
             param();
             paramListLinha();
         }
-        
+        else
+        {
+            throw new SyntaxError("paramList mal definido");
+        }
     }
     
      public void paramListLinha()
@@ -308,8 +319,6 @@ public class Parser {
             param();
             paramListLinha();
         }
-       
-              
     }
     public void param()
     {
@@ -318,10 +327,13 @@ public class Parser {
             type();
             paramLinha();   
         }
-      
-
+        else
+        {
+            throw new SyntaxError("param mal definido");
+        }
     }
     
+    // ################################ VERIFICAR PARAMLINHA #############################
     public void paramLinha()
     {
         if (lToken.getAttribute() == Names.COE)
@@ -329,7 +341,14 @@ public class Parser {
             advance();
             match(Names.SEP, Names.COD);
         }
-        match(Names.ID, Names.ID);
+        if (lToken.getAttribute() == Names.ID)
+        {
+            match(Names.ID, Names.ID);
+        }
+        else
+        {
+            throw new SyntaxError("paramLinha mal definido");
+        }
     }
     
     public void statementsOpt()
@@ -339,16 +358,17 @@ public class Parser {
             System.out.println("oiiiiiiii");
             statements();
         }
-        else
-            ;
     }
     public void statements()
     {
-     
         if (lToken.IsStatementType(lToken))
         {
             statement();
             statementsLinha();
+        }
+        else
+        {
+            throw new SyntaxError("statements mal definido");
         }
     }
     
@@ -395,22 +415,29 @@ public class Parser {
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.IF)
-        	ifStat();
+        {
+            ifStat();
+        }
         else if(lToken.getAttribute() == Names.FOR)
-                forStat();
-        	
+        {
+            forStat();
+        }	
         else if(lToken.getAttribute() == Names.BREAK)
         {
-        	advance();
-        	match(Names.SEP, Names.POINTV);
+            advance();
+            match(Names.SEP, Names.POINTV);
         }
-        
-         else if(lToken.getAttribute() == Names.POINTV)
-        	match(Names.SEP, Names.POINTV);
-         else 
-                throw new SyntaxError("Statement mal formado");
+        else if(lToken.getAttribute() == Names.POINTV)
+        {
+            match(Names.SEP, Names.POINTV);
+        }
+        else
+        {
+            throw new SyntaxError("Statment mal definido");
+        }
    
     }
+    
     public void atribStat()
     {
         if (lToken.getAttribute() == Names.ID)
@@ -419,9 +446,12 @@ public class Parser {
             match(Names.RELOP, Names.EQ);
             atribStatLinha();
         }
-       
-
+        else
+        {
+            throw new SyntaxError("atribStatment mal definido");
+        }
     }
+    
     public void atribStatLinha()
     {
         if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
@@ -432,6 +462,10 @@ public class Parser {
         {
             allocExpression();
         }
+        else
+        {
+            throw new SyntaxError("atribStatLinha mal definido");
+        }
        
     }
     public void printStat()
@@ -441,7 +475,10 @@ public class Parser {
             advance();
             expression();
         }
-       
+        else
+        {
+            throw new SyntaxError("printStatment mal definido");
+        }
     }
     public void readStat()
     {
@@ -450,6 +487,10 @@ public class Parser {
             System.out.println("oioioi" + lToken.getName());
             advance();
             lValue();
+        }
+        else
+        {
+            throw new SyntaxError("readStatment mal definido");
         }
      
     }
@@ -460,7 +501,10 @@ public class Parser {
             advance();
             expression();
         }
-   
+        else
+        {
+            throw new SyntaxError("returnStatment mal definido");
+        }
     }
     public void superStat()
     {
@@ -471,7 +515,10 @@ public class Parser {
             argListOpt();
             match(Names.SEP, Names.PD);
         }
-       
+        else
+        {
+            throw new SyntaxError("superStatment mal definido");
+        }
     }
     public void ifStat()
     {
@@ -486,7 +533,10 @@ public class Parser {
             match(Names.SEP,Names.CHD);
             ifStatLinha();
         }
-      
+        else
+        {
+            throw new SyntaxError("ifStatment mal definido");
+        }
     }
     public void ifStatLinha()
     {
@@ -526,6 +576,10 @@ public class Parser {
                 System.out.println("oioioi 9 " + lToken.getAttribute());
     		match(Names.SEP,Names.CHD);
         }
+        else
+        {
+            throw new SyntaxError("forStatment mal definido");
+        }
     }
     public void atribStatOpt()
     {
@@ -552,6 +606,7 @@ public class Parser {
             throw new SyntaxError("Identificador inválido");
         }
     }
+    /* ######################## VER SE PRECISA POR ERRO NO LVALUECOMPLINHA OU NAO ###########################*/
     public void lValueLinha()
     {
     	if (lToken.getAttribute() == Names.COE)
@@ -571,6 +626,7 @@ public class Parser {
     		lValueCompLinha();
         }
     }
+    /* ######################## VER SE PRECISA POR ERRO NO LVALUECOMPLINHA OU NAO ###########################*/
     public void lValueCompLinha()
     {
     	if (lToken.getAttribute() == Names.COE)
@@ -587,7 +643,9 @@ public class Parser {
         {
     		numExpression();
     		expressionLinha();
-        }else{
+        }
+        else
+        {
             throw new SyntaxError("Expressão mal definida");
         }
     }
@@ -617,6 +675,10 @@ public class Parser {
     		expression();
     		match(Names.SEP,Names.COD);
     	}
+        else
+        {
+            throw new SyntaxError("allocExpression mal definido.");
+        }
     }
     public void numExpression()
     {
@@ -624,6 +686,10 @@ public class Parser {
         {
     		term();
     		numExpressionLinha();
+        }
+        else
+        {
+            throw new SyntaxError("numExpression mal definido.");
         }
     }
     
@@ -647,6 +713,10 @@ public class Parser {
     		unaryExpression();
     		termLinha();
         }
+        else
+        {
+            throw new SyntaxError("Termo mal definido.");
+        }
     }
     public void termLinha()
     {
@@ -662,6 +732,10 @@ public class Parser {
         {
     		advance();
     		factor();
+        }
+        else
+        {
+            throw new SyntaxError("UnaryExpression mal definido.");
         }
     }
     public void factor()
@@ -681,12 +755,16 @@ public class Parser {
     		//advance();
     		lValue();
         }
-    	else
+        else if (lToken.getAttribute() == Names.PE)
     	{
     		match(Names.SEP,Names.PE);
     		expression();
     		match(Names.SEP,Names.PD);
     	}
+        else
+        {
+            throw new SyntaxError("Fator mal definido.");
+        }
     }
     public void argListOpt()
     {
@@ -702,7 +780,7 @@ public class Parser {
     		expression();
     		argListLinha();
         }else{
-            throw new SyntaxError("Argumento Inválido");
+            throw new SyntaxError("Argumento inválido.");
         }
     }
     public void argListLinha()
