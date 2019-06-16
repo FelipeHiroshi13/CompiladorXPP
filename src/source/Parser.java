@@ -235,9 +235,9 @@ public class Parser
     
     public void constructDeclList() // Esse metodo e o de baixo sao realmente necessarios ?
     {
-        constructDecl();
         if (lToken.getAttribute()== Names.CONSTRUCTOR)
         {
+            constructDecl();
             constructDeclListLinha();
         }
         else
@@ -622,7 +622,7 @@ public class Parser
                 System.out.println("oioioi 2 " + lToken.getAttribute());
     		atribStatOpt();
                 System.out.println("oioioi 3 " + lToken.getAttribute());
-//                advance();
+//              advance();
                 match(Names.SEP,Names.POINTV);
                 System.out.println("oioioi 4 " + lToken.getAttribute());
     		expressionOpt();
@@ -724,8 +724,8 @@ public class Parser
     	 //TODO:Verificar se eh relop
         if(lToken.getName() == Names.RELOP)
         {
-    	 advance();
-    	 numExpression();
+            advance();
+            numExpression();
         }
     }
     
@@ -733,18 +733,18 @@ public class Parser
     {
     	if (lToken.getName() == Names.NEW)
         {
-    		advance();
-    		match(Names.ID);
-    		match(Names.SEP,Names.PE);
-    		argListOpt();
-    		match(Names.SEP,Names.PD);
+            advance();
+            match(Names.ID);
+            match(Names.SEP,Names.PE);
+            argListOpt();
+            match(Names.SEP,Names.PD);
         }
     	else if(lToken.isVariableType(lToken))
     	{
-    		advance();
-    		match(Names.SEP,Names.COE);
-    		expression();
-    		match(Names.SEP,Names.COD);
+            advance();
+            match(Names.SEP,Names.COE);
+            expression();
+            match(Names.SEP,Names.COD);
     	}
         else
         {
@@ -756,8 +756,8 @@ public class Parser
     {
     	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
-    		term();
-    		numExpressionLinha();
+            term();
+            numExpressionLinha();
         }
         else
         {
@@ -769,8 +769,8 @@ public class Parser
     {
     	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
-    		advance();
-    		term();
+            advance();
+            term();
         }
     	
     }
@@ -779,11 +779,10 @@ public class Parser
     {
     	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
-                
-//    		advance();
-//                System.out.println(lToken.getName());
-    		unaryExpression();
-    		termLinha();
+//          advance();
+//          System.out.println(lToken.getName());
+            unaryExpression();
+            termLinha();
         }
         else
         {
@@ -795,8 +794,8 @@ public class Parser
     {
     	if (lToken.getAttribute() == Names.MULT || lToken.getAttribute() == Names.DIV || lToken.getAttribute() == Names.MOD)
         {
-    		advance();
-    		unaryExpression();
+            advance();
+            unaryExpression();
         }
     }
     
@@ -804,8 +803,8 @@ public class Parser
     {
     	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
-    		advance();
-    		factor();
+            advance();
+            factor();
         }
         else
         {
@@ -817,23 +816,23 @@ public class Parser
     {
     	if (lToken.getName() == Names.INTEGER_LITERAL)
         {
-    		advance();
+            advance();
         }
     	//TODO STRING LITERAL
     	else if (lToken.getName() == Names.STRINGLITERAL)
         {
-    		advance();
+            advance();
         }
     	else if (lToken.getAttribute()== Names.ID)
         {
-    		//advance();
-    		lValue();
+            //advance();
+            lValue();
         }
         else if (lToken.getAttribute() == Names.PE)
     	{
-    		match(Names.SEP,Names.PE);
-    		expression();
-    		match(Names.SEP,Names.PD);
+            match(Names.SEP,Names.PE);
+            expression();
+            match(Names.SEP,Names.PD);
     	}
         else
         {
