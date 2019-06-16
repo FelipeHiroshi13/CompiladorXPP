@@ -548,10 +548,8 @@ public class Parser {
                 System.out.println("olaaaa");
                 match(Names.ID);
     		lValueLinha();
-        }else if(lToken.isVariableType(lToken)){
-            throw new SyntaxError("Identificador Esperado no read,\n não pode ser palavra reservada");
         }else{
-            throw new SyntaxError("Identificador Esperado no read");
+            throw new SyntaxError("Identificador inválido");
         }
     }
     public void lValueLinha()
