@@ -457,51 +457,78 @@ public class Parser
         System.out.println("Statements " + lToken.getAttribute());
         if(lToken.isVariableType(lToken) && (this.nextToken(position + 1).getAttribute() == Names.ID || (this.nextToken(position + 1).getAttribute() == Names.COE && this.nextToken(position + 2).getAttribute() == Names.COD)))
         {
+            System.out.println("varDeclList " + lToken.getAttribute());
+            System.out.println("varDeclList " + lToken.getName());
+            System.out.println("varDeclList " + lToken.getLexeme());
             varDeclList(); 
         }
         else if(lToken.getAttribute() == Names.ID)
         {
+            System.out.println("atribStat " + lToken.getAttribute());
+            System.out.println("atribStat " + lToken.getName());
+            System.out.println("atribStat " + lToken.getLexeme());
             atribStat();
-            System.out.println("atrtr" + lToken.getAttribute());
-            //match(Names.SEP, Names.POINTV);
+            match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.PRINT)
         {
+            System.out.println("printStat " + lToken.getAttribute());
+            System.out.println("printStat " + lToken.getName());
+            System.out.println("printStat " + lToken.getLexeme());
             printStat();
-            System.out.println("PRINT CORNO" + lToken.getAttribute());
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.READ)
         {
+            System.out.println("readStat " + lToken.getAttribute());
+            System.out.println("readStat " + lToken.getName());
+            System.out.println("readStat " + lToken.getLexeme());
             readStat();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.RETURN)
         {
+            System.out.println("returnStat " + lToken.getAttribute());
+            System.out.println("returnStat " + lToken.getName());
+            System.out.println("returnStat " + lToken.getLexeme());
             returnStat();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.SUPER)
         {
+            System.out.println("superStat " + lToken.getAttribute());
+            System.out.println("superStat " + lToken.getName());
+            System.out.println("superStat " + lToken.getLexeme());
             superStat();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.IF)
         {
+            System.out.println("ifStat " + lToken.getAttribute());
+            System.out.println("ifStat " + lToken.getName());
+            System.out.println("ifStat " + lToken.getLexeme());
             ifStat();
         }
         else if(lToken.getAttribute() == Names.FOR)
         {
+            System.out.println("forStat " + lToken.getAttribute());
+            System.out.println("forStat " + lToken.getName());
+            System.out.println("forStat " + lToken.getLexeme());
             forStat();
         }	
         else if(lToken.getAttribute() == Names.BREAK)
         {
+            System.out.println("statBreak " + lToken.getAttribute());
+            System.out.println("statBreak " + lToken.getName());
+            System.out.println("statBreak " + lToken.getLexeme());
             advance();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.POINTV)
         {
-            System.out.println("de");
+            System.out.println("statPointv " + lToken.getAttribute());
+            System.out.println("statPointv " + lToken.getName());
+            System.out.println("statPointv " + lToken.getLexeme());
             match(Names.SEP, Names.POINTV);
         }
         else
@@ -518,7 +545,7 @@ public class Parser
             lValue();
             match(Names.RELOP, Names.EQ);
             atribStatLinha();
-            match(Names.SEP, Names.POINTV);
+//            match(Names.SEP, Names.POINTV);
         }
         else
         {
