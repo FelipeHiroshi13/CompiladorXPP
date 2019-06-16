@@ -670,13 +670,13 @@ public class Parser {
     		advance();
         }
     	//TODO STRING LITERAL
-    	else if (lToken.getName() == Names.STRING)
+    	else if (lToken.getName() == Names.STRINGLITERAL)
         {
     		advance();
         }
     	else if (lToken.getAttribute()== Names.ID)
         {
-    		advance();
+    		//advance();
     		lValue();
         }
     	else
