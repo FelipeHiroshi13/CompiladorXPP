@@ -203,12 +203,12 @@ public class Parser
         }
         match(Names.ID, Names.ID);
         varDeclOpt();
-        
-        if(lToken.getAttribute() != Names.PE)
+        if(lToken.getAttribute() != Names.PE){
             match(Names.SEP, Names.POINTV);
-        else
+        }
+        else{
             methodBody();
-        
+        }
     }
     
     public void varDeclOpt()
@@ -462,7 +462,8 @@ public class Parser
         else if(lToken.getAttribute() == Names.ID)
         {
             atribStat();
-            match(Names.SEP, Names.POINTV);
+            System.out.println("atrtr" + lToken.getAttribute());
+            //match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.PRINT)
         {
@@ -517,6 +518,7 @@ public class Parser
             lValue();
             match(Names.RELOP, Names.EQ);
             atribStatLinha();
+            match(Names.SEP, Names.POINTV);
         }
         else
         {
