@@ -587,6 +587,8 @@ public class Parser {
         {
     		numExpression();
     		expressionLinha();
+        }else{
+            throw new SyntaxError("Expressão mal definida");
         }
     }
      public void expressionLinha()
