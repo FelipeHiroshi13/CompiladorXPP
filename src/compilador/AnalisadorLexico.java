@@ -32,12 +32,14 @@ public class AnalisadorLexico {
         
         do{
             token = scannerToken.nextToken();
+            System.out.println("-->" + token.getName());
             if(token.getName() == Names.UNDEF || token.getLexicalError() == true){
+                System.out.println("oioioi");
                 telaPrincipal.jSetTextAreaConsole("Erro Léxico na linha " + Token.getLine());
                 erroLexico = true;
             }
             addTokenList(tokenList, token);
-        }while(token.getName() != Names.EOF);
+        }while(token.getName() != Names.EOF && erroLexico == false);
         System.out.println("");
     }
     
