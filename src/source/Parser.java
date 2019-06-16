@@ -443,9 +443,9 @@ public class Parser
     public void statement()    
     {
         System.out.println("77777" + lToken.getAttribute());
-        if(lToken.isVariableType(lToken))
+        if(lToken.isVariableType(lToken) && (this.nextToken(position + 1).getAttribute() == Names.ID || (this.nextToken(position + 1).getAttribute() == Names.COE && this.nextToken(position + 2).getAttribute() == Names.COD)))
         {
-            varDeclList();  
+            varDeclList(); 
         }
         else if(lToken.getAttribute() == Names.ID)
         {

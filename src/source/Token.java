@@ -100,7 +100,7 @@ public class Token
     
     public boolean isVariableType(Token lToken)
     {
-        if(lToken.getAttribute()== Names.ID || lToken.getAttribute() == Names.STRING || lToken.getAttribute() == Names.INT)
+        if(lToken.getAttribute() == Names.ID || lToken.getAttribute() == Names.STRING || lToken.getAttribute() == Names.INT)
             return true;
         else
             return false;
