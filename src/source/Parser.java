@@ -61,7 +61,6 @@ public class Parser
     public void program() throws SyntaxError
     {
         lToken = tokenList.get(0);
-        System.out.println("--->" + lToken.getName());
         if(lToken.getAttribute()== Names.CLASS)
         {
             classList();               
@@ -177,7 +176,6 @@ public class Parser
     {
         if(lToken.isVariableType(lToken))
         {
-            System.out.println("variável" + lToken.getAttribute());
             type();
             varDeclLinha();
         }
@@ -190,7 +188,6 @@ public class Parser
     // ########################################## botar erro no vardeclinha ###############################
     public void varDeclLinha()
     {
-        System.out.println("variável" + lToken.getAttribute());
         if (lToken.getAttribute()== Names.COE) 
         {
             advance();
@@ -225,8 +222,6 @@ public class Parser
     {
         if(lToken.isVariableType(lToken))
         {
-            System.out.println(lToken.getName());
-            System.out.println(lToken.getAttribute() + " " + lToken.getLexeme());
             
             advance();
         }
@@ -343,17 +338,13 @@ public class Parser
     
     public void methodBody()
     {
-        System.out.println("Corpo método");
         if (lToken.getAttribute() == Names.PE) 
         {
             match(Names.SEP, Names.PE);
             paramListOpt();
             match(Names.SEP, Names.PD);
-            System.out.println("=====>" + lToken.getAttribute());
             match(Names.SEP, Names.CHE);
-            System.out.println("=====>" + lToken.getAttribute());
             statementsOpt();
-            System.out.println("===>" + lToken.getName());
             match(Names.SEP, Names.CHD);
         }
         else
@@ -426,7 +417,7 @@ public class Parser
     {
         if (lToken.IsStatementType(lToken))
         {
-            System.out.println("oiiiiiiii");
+            
             statements();
         }
     }
@@ -437,6 +428,8 @@ public class Parser
         {
             statement();
             statementsLinha();
+            
+            
         }
         else
         {
@@ -446,89 +439,64 @@ public class Parser
     
     public void statementsLinha()
     {
+       
         if (lToken.IsStatementType(lToken))
         {
-            statement();
+            System.out.println("asd " + lToken.getAttribute());
+            System.out.println("asd1 " + lToken.getName());
+            System.out.println("asd2 " + lToken.getLexeme());
+            statements();
         }
     }
    
     public void statement()    
     {
-        System.out.println("Statements " + lToken.getAttribute());
         if(lToken.isVariableType(lToken) && (this.nextToken(position + 1).getAttribute() == Names.ID || (this.nextToken(position + 1).getAttribute() == Names.COE && this.nextToken(position + 2).getAttribute() == Names.COD)))
         {
-            System.out.println("varDeclList " + lToken.getAttribute());
-            System.out.println("varDeclList " + lToken.getName());
-            System.out.println("varDeclList " + lToken.getLexeme());
             varDeclList(); 
         }
         else if(lToken.getAttribute() == Names.ID)
         {
-            System.out.println("atribStat " + lToken.getAttribute());
-            System.out.println("atribStat " + lToken.getName());
-            System.out.println("atribStat " + lToken.getLexeme());
             atribStat();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.PRINT)
         {
-            System.out.println("printStat " + lToken.getAttribute());
-            System.out.println("printStat " + lToken.getName());
-            System.out.println("printStat " + lToken.getLexeme());
             printStat();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.READ)
         {
-            System.out.println("readStat " + lToken.getAttribute());
-            System.out.println("readStat " + lToken.getName());
-            System.out.println("readStat " + lToken.getLexeme());
             readStat();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.RETURN)
         {
-            System.out.println("returnStat " + lToken.getAttribute());
-            System.out.println("returnStat " + lToken.getName());
-            System.out.println("returnStat " + lToken.getLexeme());
             returnStat();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.SUPER)
         {
-            System.out.println("superStat " + lToken.getAttribute());
-            System.out.println("superStat " + lToken.getName());
-            System.out.println("superStat " + lToken.getLexeme());
             superStat();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.IF)
         {
-            System.out.println("ifStat " + lToken.getAttribute());
-            System.out.println("ifStat " + lToken.getName());
-            System.out.println("ifStat " + lToken.getLexeme());
+      
             ifStat();
         }
         else if(lToken.getAttribute() == Names.FOR)
         {
-            System.out.println("forStat " + lToken.getAttribute());
-            System.out.println("forStat " + lToken.getName());
-            System.out.println("forStat " + lToken.getLexeme());
+
             forStat();
         }	
         else if(lToken.getAttribute() == Names.BREAK)
         {
-            System.out.println("statBreak " + lToken.getAttribute());
-            System.out.println("statBreak " + lToken.getName());
-            System.out.println("statBreak " + lToken.getLexeme());
             advance();
             match(Names.SEP, Names.POINTV);
         }
         else if(lToken.getAttribute() == Names.POINTV)
         {
-            System.out.println("statPointv " + lToken.getAttribute());
-            System.out.println("statPointv " + lToken.getName());
-            System.out.println("statPointv " + lToken.getLexeme());
             match(Names.SEP, Names.POINTV);
         }
         else
@@ -539,7 +507,7 @@ public class Parser
     
     public void atribStat()
     {
-        System.out.println("atribuiçã0 " + lToken.getAttribute());
+        
         if (lToken.getAttribute() == Names.ID)
         {
             lValue();
@@ -586,7 +554,6 @@ public class Parser
     {
         if (lToken.getAttribute() == Names.READ)
         {
-            System.out.println("oioioi" + lToken.getName());
             advance();
             lValue();
         }
@@ -660,25 +627,16 @@ public class Parser
     	if (lToken.getAttribute() == Names.FOR)
         {
     		advance();
-                System.out.println("oioioi 1 " + lToken.getAttribute());
     		match(Names.SEP,Names.PE);
-                System.out.println("oioioi 2 " + lToken.getAttribute());
     		atribStatOpt();
-                System.out.println("oioioi 3 " + lToken.getAttribute());
 //              advance();
                 match(Names.SEP,Names.POINTV);
-                System.out.println("oioioi 4 " + lToken.getAttribute());
     		expressionOpt();
-                System.out.println("oioioi 5 " + lToken.getAttribute());
     		match(Names.SEP,Names.POINTV);
-                System.out.println("oioioi 6 " + lToken.getAttribute());
     		atribStatOpt();
-                System.out.println("oioioi 7 " + lToken.getAttribute());
     		match(Names.SEP,Names.PD);
     		match(Names.SEP,Names.CHE);
-                System.out.println("oioioi 8 " + lToken.getAttribute());
     		statements();
-                System.out.println("oioioi 9 " + lToken.getAttribute());
     		match(Names.SEP,Names.CHD);
         }
         else
@@ -707,7 +665,6 @@ public class Parser
     {
     	if (lToken.getAttribute()== Names.ID)
         {
-                System.out.println("Lvalue " + lToken.getLexeme());
                 match(Names.ID);
     		lValueLinha();
         }else{
@@ -906,10 +863,8 @@ public class Parser
     
     public void argListLinha()
     {
-        System.out.println("perra" + lToken.getAttribute());
     	if (lToken.getAttribute() == Names.VIR)
         {
-                System.out.println("perrwqwqwa");
     		advance();
     		argList();
                 argListLinha();

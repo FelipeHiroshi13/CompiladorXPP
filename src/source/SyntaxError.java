@@ -32,7 +32,7 @@ public class SyntaxError extends RuntimeException
         super(str);
         msg = str;
         syntaxError = true;
-        telaPrincipal.jSetTextAreaConsole("Erro Sintatico na Linha " + (Token.getLine()-1) + ": " + msg);
+        telaPrincipal.jSetTextAreaConsole("Erro Sintatico na Linha " + (Token.getLine()) + ": " + msg);
     }
     
     public String toString()

@@ -117,6 +117,7 @@ public class Token
             || lToken.getAttribute() == Names.BREAK
             || lToken.getAttribute() == Names.POINTV)
         {
+          
             return true;
         }
         return false;
