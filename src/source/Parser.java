@@ -697,15 +697,20 @@ public class Parser {
         {
     		expression();
     		argListLinha();
+        }else{
+            throw new SyntaxError("Argumento Inválido");
         }
     }
     public void argListLinha()
     {
-    	if (lToken.getName() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
+        System.out.println("perra" + lToken.getAttribute());
+    	if (lToken.getAttribute() == Names.VIR)
         {
+                System.out.println("perrwqwqwa");
     		advance();
     		argList();
-    		match(Names.SEP,Names.VIR);
+                argListLinha();
+    		//match(Names.SEP,Names.VIR);
         }
     }
 
