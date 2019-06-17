@@ -13,8 +13,8 @@ import source.SyntaxError;
 //import java.util.Scanner;
 
 /**
- *
- * @author 201719050198
+ * Trabalho Compilador
+ * Alunos: Felipe Hiroshi Baron, Thiago Luiz Targino, Walter Espirito Santo
  */
 public class Compilador {
 
