@@ -185,7 +185,6 @@ public class Parser
         }
     }
     
-    // ########################################## botar erro no vardeclinha ###############################
     public void varDeclLinha()
     {
         if (lToken.getAttribute()== Names.COE) 
@@ -442,9 +441,6 @@ public class Parser
        
         if (lToken.IsStatementType(lToken))
         {
-            System.out.println("asd " + lToken.getAttribute());
-            System.out.println("asd1 " + lToken.getName());
-            System.out.println("asd2 " + lToken.getLexeme());
             statements();
         }
     }
@@ -527,7 +523,7 @@ public class Parser
         {
             expression();
         }
-        else if (lToken.getName()== Names.NEW || lToken.isVariableType(lToken))
+        else if (lToken.getAttribute()== Names.NEW || lToken.isVariableType(lToken))
         {
             allocExpression();
         }
@@ -672,7 +668,6 @@ public class Parser
         }
     }
     
-    /* ######################## VER SE PRECISA POR ERRO NO LVALUECOMPLINHA OU NAO ###########################*/
     public void lValueLinha()
     {
     	if (lToken.getAttribute() == Names.COE)
@@ -694,7 +689,6 @@ public class Parser
         }
     }
     
-    /* ######################## VER SE PRECISA POR ERRO NO LVALUECOMPLINHA OU NAO ###########################*/
     public void lValueCompLinha()
     {
     	if (lToken.getAttribute() == Names.COE)
@@ -721,7 +715,6 @@ public class Parser
     
     public void expressionLinha()
     {
-    	 //TODO:Verificar se eh relop
         if(lToken.getName() == Names.RELOP)
         {
             advance();
@@ -731,7 +724,7 @@ public class Parser
     
     public void allocExpression()
     {
-    	if (lToken.getName() == Names.NEW)
+    	if (lToken.getAttribute()== Names.NEW)
         {
             advance();
             match(Names.ID);
@@ -779,8 +772,6 @@ public class Parser
     {
     	if (lToken.getAttribute() == Names.PLUS || lToken.getAttribute() == Names.MINUS)
         {
-//          advance();
-//          System.out.println(lToken.getName());
             unaryExpression();
             termLinha();
         }
@@ -818,7 +809,6 @@ public class Parser
         {
             advance();
         }
-    	//TODO STRING LITERAL
     	else if (lToken.getName() == Names.STRINGLITERAL)
         {
             advance();

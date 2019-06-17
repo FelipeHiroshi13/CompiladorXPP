@@ -10,7 +10,6 @@ import source.ScannerToken;
 public class WhiteSpace{
     private int lineCount;
     public void isWhiteSpace(String input, ScannerToken scannerToken){
-        System.out.println("");
         while(scannerToken.posicao < input.length() && ((input.charAt(scannerToken.posicao) == ' ' || input.charAt(scannerToken.posicao) == '\n') || input.charAt(scannerToken.posicao) ==  '\t')){
            if(input.charAt(scannerToken.posicao) == '\n')
                lineCount++;

@@ -109,7 +109,7 @@ public class Op extends Token implements TokenDefine{
                 scannerToken.posicao++;
                 //isErrorLexico(scannerToken);
                 if(input.charAt(scannerToken.posicao) ==  '='){
-                    token.setName(Names.RELOP);
+                    token.setName(Names.OP);
                     token.setAttribute(Names.DIF);
                     scannerToken.posicao++;
                 }
