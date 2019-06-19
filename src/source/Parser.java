@@ -63,14 +63,14 @@ public class Parser
         currentST = globalST;
     }
     
-    private void AddToST(Token lToken, boolean reserved)
+    private void AddToST(Token lToken, boolean reserved) throws SyntaxError
     {
         boolean addedSuccesfully;
         STEntry stEntry = new STEntry(lToken, lToken.getLexeme(), reserved);
         addedSuccesfully = currentST.add(stEntry);
         if(!addedSuccesfully)
         {
-            System.out.println("Ja existe variavel nesse escopo, tanso");
+            throw new SyntaxError("erro Semantico com o lexema " + AnalisadorSintatico.debug.get(lToken.getLexeme()));
         }
     }
     
@@ -107,7 +107,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("Identificador esperado: " + AnalisadorSintatico.debug.get(tokenCodigo) + "\nNo lugar de: " + AnalisadorSintatico.debug.get(lToken.getName()));
+            throw new SyntaxError("(Erro Sintático)Identificador esperado: " + AnalisadorSintatico.debug.get(tokenCodigo) + "\nNo lugar de: " + AnalisadorSintatico.debug.get(lToken.getName()));
         }
     }
     
@@ -119,7 +119,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("Esperava o atributo " + AnalisadorSintatico.debug.get(tokenAtributo) + "\nNo lugar de: " +  AnalisadorSintatico.debug.get(lToken.getAttribute()));
+            throw new SyntaxError("(Erro Sintatico) Esperava o atributo " + AnalisadorSintatico.debug.get(tokenAtributo) + "\nNo lugar de: " +  AnalisadorSintatico.debug.get(lToken.getAttribute()));
         }
     }
     
