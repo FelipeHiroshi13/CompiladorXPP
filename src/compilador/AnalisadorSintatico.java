@@ -7,8 +7,8 @@ import java.util.Map;
 import source.Names;
 import source.Parser;
 import source.Token;
-import source.SyntaxError;
-import static source.SyntaxError.syntaxError;
+import source.Error;
+import static source.Error.syntaxError;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

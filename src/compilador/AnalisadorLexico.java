@@ -12,7 +12,7 @@ import java.util.List;
 import source.ScannerToken;
 import source.Token;
 import source.Names;
-import source.SyntaxError;
+import source.Error;
 /**
  *
  * @author felipe
@@ -21,7 +21,7 @@ public class AnalisadorLexico {
     final private String input;
     public boolean erroLexico = false;
     public List<Token> tokenList = new ArrayList<>();
-    private SyntaxError syntaxError;
+    private Error syntaxError;
     public AnalisadorLexico(String input){
         this.input = input;
     }

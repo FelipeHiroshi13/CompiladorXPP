@@ -13,20 +13,20 @@ import compilador.TelaPrincipal;
  *
  * @author 201719050163
  */
-public class SyntaxError extends RuntimeException
+public class Error extends RuntimeException
 {
     private String msg;
     public static TelaPrincipal telaPrincipal;
     
     
     public static boolean syntaxError = false;
-    public SyntaxError()
+    public Error()
     {
         msg = "Unexpected";
     }
     
     
-    public SyntaxError(String str)
+    public Error(String str)
     {
         
         super(str);

@@ -63,14 +63,14 @@ public class Parser
         currentST = globalST;
     }
     
-    private void AddToST(Token lToken, boolean reserved) throws SyntaxError
+    private void AddToST(Token lToken, boolean reserved) throws Error
     {
         boolean addedSuccesfully;
         STEntry stEntry = new STEntry(lToken, lToken.getLexeme(), reserved);
         addedSuccesfully = currentST.add(stEntry);
         if(!addedSuccesfully)
         {
-            throw new SyntaxError("erro Semantico com o lexema '" + lToken.getLexeme()+ "'");
+            throw new Error("erro Semantico com o lexema '" + lToken.getLexeme()+ "'");
         }
     }
     
@@ -107,7 +107,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("(Erro Sintático)Identificador esperado: " + AnalisadorSintatico.debug.get(tokenCodigo) + "\nNo lugar de: " + AnalisadorSintatico.debug.get(lToken.getName()));
+            throw new Error("(Erro Sintático)Identificador esperado: " + AnalisadorSintatico.debug.get(tokenCodigo) + "\nNo lugar de: " + AnalisadorSintatico.debug.get(lToken.getName()));
         }
     }
     
@@ -119,11 +119,11 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("(Erro Sintatico) Esperava o atributo " + AnalisadorSintatico.debug.get(tokenAtributo) + "\nNo lugar de: " +  AnalisadorSintatico.debug.get(lToken.getAttribute()));
+            throw new Error("(Erro Sintatico) Esperava o atributo " + AnalisadorSintatico.debug.get(tokenAtributo) + "\nNo lugar de: " +  AnalisadorSintatico.debug.get(lToken.getAttribute()));
         }
     }
     
-    public void program() throws SyntaxError
+    public void program() throws Error
     {
         lToken = tokenList.get(0);
         if(lToken.getAttribute()== Names.CLASS)
@@ -132,7 +132,7 @@ public class Parser
         }
         else if (lToken.getName() != Names.EOF)
         {
-            throw new SyntaxError("Classe mal definida");
+            throw new Error("Classe mal definida");
         }
     }
     
@@ -145,7 +145,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("classList mal definida");
+            throw new Error("classList mal definida");
         }
     }
     
@@ -168,7 +168,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("Classe mal definida");
+            throw new Error("Classe mal definida");
         }
     }
     
@@ -185,7 +185,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("varDecl mal definido.");
+            throw new Error("varDecl mal definido.");
         }
     }
     
@@ -201,7 +201,7 @@ public class Parser
         }
         else
         {
-           throw new SyntaxError("Inicio do bloco da classe nao definido");
+           throw new Error("Inicio do bloco da classe nao definido");
         }
     }
     
@@ -225,7 +225,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("varDecl mal definido.");
+            throw new Error("varDecl mal definido.");
         }
     }
     
@@ -247,7 +247,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("varDecl mal definido.");
+            throw new Error("varDecl mal definido.");
         }
     }
     
@@ -305,7 +305,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("Tipo de variavel nao existente");
+            throw new Error("Tipo de variavel nao existente");
         }
     }
     
@@ -326,7 +326,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("constructDeclList mal definido");
+            throw new Error("constructDeclList mal definido");
         }
     }
     
@@ -349,7 +349,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("constructDecl mal definido");
+            throw new Error("constructDecl mal definido");
         }
     }
     
@@ -370,7 +370,7 @@ public class Parser
         } 
         else
         {
-            throw new SyntaxError("methodDeclList mal definido");
+            throw new Error("methodDeclList mal definido");
         }
     }
     
@@ -393,7 +393,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("methodDecl mal definido");
+            throw new Error("methodDecl mal definido");
         }
     }
     
@@ -412,7 +412,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("methodDeclLinha mal definido");
+            throw new Error("methodDeclLinha mal definido");
         }
     }
     
@@ -430,7 +430,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("methodBody mal definido");
+            throw new Error("methodBody mal definido");
         }
     }
     
@@ -449,7 +449,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("paramList mal definido");
+            throw new Error("paramList mal definido");
         }
     }
     
@@ -472,7 +472,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("param mal definido");
+            throw new Error("param mal definido");
         }
     }
     
@@ -490,7 +490,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("paramLinha mal definido");
+            throw new Error("paramLinha mal definido");
         }
     }
     
@@ -514,7 +514,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("statements mal definido");
+            throw new Error("statements mal definido");
         }
     }
     
@@ -579,7 +579,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("Statment mal definido");
+            throw new Error("Statment mal definido");
         }
     }
     
@@ -595,7 +595,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("atribStatment mal definido");
+            throw new Error("atribStatment mal definido");
         }
     }
     
@@ -611,7 +611,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("atribStatLinha mal definido");
+            throw new Error("atribStatLinha mal definido");
         }
     }
     
@@ -624,7 +624,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("printStatment mal definido");
+            throw new Error("printStatment mal definido");
         }
     }
     
@@ -637,7 +637,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("readStatment mal definido");
+            throw new Error("readStatment mal definido");
         }
      
     }
@@ -651,7 +651,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("returnStatment mal definido");
+            throw new Error("returnStatment mal definido");
         }
     }
     
@@ -666,7 +666,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("superStatment mal definido");
+            throw new Error("superStatment mal definido");
         }
     }
     
@@ -685,7 +685,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("ifStatment mal definido");
+            throw new Error("ifStatment mal definido");
         }
     }
     
@@ -719,7 +719,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("forStatment mal definido");
+            throw new Error("forStatment mal definido");
         }
     }
     
@@ -747,7 +747,7 @@ public class Parser
             match(Names.ID);
             lValueLinha();
         }else{
-            throw new SyntaxError("Identificador inválido");
+            throw new Error("Identificador inválido");
         }
     }
     
@@ -792,7 +792,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("Expressão mal definida");
+            throw new Error("Expressão mal definida");
         }
     }
     
@@ -824,7 +824,7 @@ public class Parser
     	}
         else
         {
-            throw new SyntaxError("allocExpression mal definido.");
+            throw new Error("allocExpression mal definido.");
         }
     }
     
@@ -837,7 +837,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("numExpression mal definido.");
+            throw new Error("numExpression mal definido.");
         }
     }
     
@@ -860,7 +860,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("Termo mal definido.");
+            throw new Error("Termo mal definido.");
         }
     }
     
@@ -882,7 +882,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("UnaryExpression mal definido.");
+            throw new Error("UnaryExpression mal definido.");
         }
     }
     
@@ -909,7 +909,7 @@ public class Parser
     	}
         else
         {
-            throw new SyntaxError("Fator mal definido.");
+            throw new Error("Fator mal definido.");
         }
     }
     
@@ -930,7 +930,7 @@ public class Parser
         }
         else
         {
-            throw new SyntaxError("Argumento inválido.");
+            throw new Error("Argumento inválido.");
         }
     }
     

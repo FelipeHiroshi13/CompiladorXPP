@@ -8,7 +8,7 @@ package compilador;
 //import java.io.FileReader;
 
 import java.util.Scanner;
-import source.SyntaxError;
+import source.Error;
 
 //import java.util.Scanner;
 
@@ -23,7 +23,7 @@ public class Compilador {
      */
     public static void main(String[] args) {
         TelaPrincipal tela = new TelaPrincipal();
-        SyntaxError.telaPrincipal = tela;
+        Error.telaPrincipal = tela;
         tela.setVisible(true);   
     }
     
