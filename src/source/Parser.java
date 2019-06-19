@@ -19,6 +19,7 @@ public class Parser
     private List<Token> tokenList;
     private Token lToken;
     public SymbolTable<STEntry> globalST;
+    public SymbolTable<STEntry> currentST;
     
     private void initSymbolTable()
     {
@@ -28,7 +29,6 @@ public class Parser
         globalST.add(new STEntry(t, "class", true));
         t = new Token(Names.EXTENDS);
         globalST.add(new STEntry(t, "extends", true));
-        t = new Token(Names.CONSTRUCTOR);
         t = new Token(Names.INT);
         globalST.add(new STEntry(t, "int", true));
         t = new Token(Names.STRING);
@@ -61,8 +61,19 @@ public class Parser
     {
         this.tokenList = tokenList;
         globalST = new SymbolTable<STEntry>();
-        //currentST = globalST;
+        currentST = globalST;
        
+    }
+    
+    private void AddToST(Token lToken, boolean reserved)
+    {
+        boolean addedSuccesfully;
+        STEntry stEntry = new STEntry(lToken, lToken.getLexeme(), reserved);
+        addedSuccesfully = currentST.add(stEntry);
+        if(!addedSuccesfully)
+        {
+            System.out.println("Ja existe variavel nesse escopo, tanso");
+        }
     }
     
     private void advance()
@@ -139,6 +150,7 @@ public class Parser
         if (lToken.getAttribute() == Names.CLASS)
         {            
             advance();
+            AddToST(lToken, false);
             match(Names.ID, Names.ID);
             classDeclLinha();
         }
@@ -239,6 +251,9 @@ public class Parser
             atribStat();
             return;
         }
+        
+        AddToST(lToken, false);
+        
         match(Names.ID, Names.ID);
         varDeclOpt();
         if(lToken.getAttribute() != Names.PE){
@@ -703,8 +718,9 @@ public class Parser
     {
     	if (lToken.getAttribute()== Names.ID)
         {
-                match(Names.ID);
-    		lValueLinha();
+            
+            match(Names.ID);
+            lValueLinha();
         }else{
             throw new SyntaxError("Identificador inválido");
         }
