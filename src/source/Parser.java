@@ -62,7 +62,6 @@ public class Parser
         this.tokenList = tokenList;
         globalST = new SymbolTable<STEntry>();
         currentST = globalST;
-       
     }
     
     private void AddToST(Token lToken, boolean reserved)
@@ -74,6 +73,14 @@ public class Parser
         {
             System.out.println("Ja existe variavel nesse escopo, tanso");
         }
+    }
+    
+    private void CreateNewST(Token lToken, boolean reserved)
+    { 
+        SymbolTable newSymbolTable = new SymbolTable<>();
+        AddToST(lToken, reserved);
+        newSymbolTable.parent = currentST;
+        currentST = newSymbolTable;
     }
     
     private void advance()
@@ -150,7 +157,7 @@ public class Parser
         if (lToken.getAttribute() == Names.CLASS)
         {            
             advance();
-            AddToST(lToken, false);
+            CreateNewST(lToken, false);
             match(Names.ID, Names.ID);
             classDeclLinha();
         }
