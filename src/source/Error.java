@@ -32,7 +32,7 @@ public class Error extends RuntimeException
         super(str);
         msg = str;
         syntaxError = true;
-        telaPrincipal.jSetTextAreaConsole("Erro na Linha " + (Token.getLine()) + ": " + msg);
+        telaPrincipal.jSetTextAreaConsole("Erro na Linha " + (Parser.lToken.lineDebug) + ": " + msg);
     }
     
     public String toString()

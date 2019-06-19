@@ -14,6 +14,7 @@ public class Token
     private  String lexeme;
     private static int length;
     private static int line =1;
+    public  int lineDebug =1;
     private static boolean erroLexico;
     
     public Token(){
@@ -45,6 +46,7 @@ public class Token
     
     public void setLine(int line){
         this.line = line;
+        lineDebug = line;
     }
     
     public void setLexicalError(){
@@ -70,6 +72,7 @@ public class Token
     public static int getLine(){
         return line+1;
     }
+    
     
     public boolean getLexicalError(){
         return erroLexico;

@@ -17,7 +17,7 @@ public class Parser
 {
     private int position = 0;
     private List<Token> tokenList;
-    private Token lToken;
+    public static Token lToken;
     public SymbolTable<STEntry> globalST;
     public SymbolTable<STEntry> currentST;
     private void initSymbolTable()
@@ -274,7 +274,7 @@ public class Parser
             method = false;
         }
         if(lToken.getAttribute() != Names.PE){
-             AddToST(tokenList.get(position-1), false);
+            AddToST(tokenList.get(position-1), false);
             match(Names.SEP, Names.POINTV);
         }
         else if(method){
