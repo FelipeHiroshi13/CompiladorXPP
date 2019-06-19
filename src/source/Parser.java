@@ -6,7 +6,10 @@
 package source;
 
 import compilador.AnalisadorSintatico;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import static tokens.Id.reserved;
 
 /**
@@ -20,6 +23,7 @@ public class Parser
     public static Token lToken;
     public SymbolTable<STEntry> globalST;
     public SymbolTable<STEntry> currentST;
+    public Map<String, SymbolTable> classesSTList; 
     private void initSymbolTable()
     {
         Token t;
@@ -60,6 +64,8 @@ public class Parser
     {
         this.tokenList = tokenList;
         globalST = new SymbolTable<STEntry>();
+        classesSTList = new HashMap<>();
+        initSymbolTable();
         currentST = globalST;
     }
     
@@ -80,12 +86,13 @@ public class Parser
         symbolTable.clear();
     }
     
-    private void CreateNewST(Token lToken, boolean reserved)
+    private SymbolTable CreateNewST(Token lToken, boolean reserved)
     { 
         SymbolTable newSymbolTable = new SymbolTable<>();
         AddToST(lToken, reserved);
         newSymbolTable.parent = currentST;
         currentST = newSymbolTable;
+        return newSymbolTable;
     }
     
     private void advance()
@@ -162,7 +169,8 @@ public class Parser
         if (lToken.getAttribute() == Names.CLASS)
         {            
             advance();
-            CreateNewST(lToken, false);
+            SymbolTable newSymbolTable = CreateNewST(lToken, false);
+            classesSTList.put(lToken.getLexeme(), newSymbolTable);
             match(Names.ID, Names.ID);
             classDeclLinha();
         }
