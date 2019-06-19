@@ -70,7 +70,7 @@ public class Parser
         addedSuccesfully = currentST.add(stEntry);
         if(!addedSuccesfully)
         {
-            throw new SyntaxError("erro Semantico com o lexema " + AnalisadorSintatico.debug.get(lToken.getLexeme()));
+            throw new SyntaxError("erro Semantico com o lexema '" + lToken.getLexeme()+ "'");
         }
     }
     
