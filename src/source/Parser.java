@@ -20,7 +20,6 @@ public class Parser
     private Token lToken;
     public SymbolTable<STEntry> globalST;
     public SymbolTable<STEntry> currentST;
-    
     private void initSymbolTable()
     {
         Token t;
@@ -73,6 +72,12 @@ public class Parser
         {
             System.out.println("Ja existe variavel nesse escopo, tanso");
         }
+    }
+    
+    private void RemoveST(SymbolTable symbolTable)
+    {
+        currentST = symbolTable.parent;
+        symbolTable.clear();
     }
     
     private void CreateNewST(Token lToken, boolean reserved)
@@ -248,6 +253,7 @@ public class Parser
     
     public void varDeclLinha()
     {
+        boolean method = true;
         if (lToken.getAttribute()== Names.COE) 
         {
             advance();
@@ -259,16 +265,25 @@ public class Parser
             return;
         }
         
-        AddToST(lToken, false);
+        
         
         match(Names.ID, Names.ID);
-        varDeclOpt();
+        
+        if (lToken.getAttribute()== Names.VIR){
+            varDeclOpt();
+            method = false;
+        }
         if(lToken.getAttribute() != Names.PE){
+             AddToST(tokenList.get(position-1), false);
             match(Names.SEP, Names.POINTV);
         }
-        else{
+        else if(method){
+            CreateNewST(tokenList.get(position-1), false);
             methodBody();
         }
+        
+        
+        
     }
     
     public void varDeclOpt()
@@ -328,6 +343,7 @@ public class Parser
     {
         if (lToken.getAttribute() == Names.CONSTRUCTOR)
         {
+            CreateNewST(lToken, false);
             match(Names.ID, Names.CONSTRUCTOR);
             methodBody();
         }
@@ -390,6 +406,7 @@ public class Parser
         }
         if (lToken.getAttribute() == Names.ID)
         {
+            CreateNewST(lToken, false);
             match(Names.ID);
             methodBody();
         }
@@ -409,6 +426,7 @@ public class Parser
             match(Names.SEP, Names.CHE);
             statementsOpt();
             match(Names.SEP, Names.CHD);
+            RemoveST(currentST);
         }
         else
         {
