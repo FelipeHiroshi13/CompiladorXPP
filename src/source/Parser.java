@@ -17,10 +17,28 @@ public class Parser
     private int position = 0;
     private List<Token> tokenList;
     private Token lToken;
+    public SymbolTable<STEntry> globalST;
+    
+    private void initSymbolTable()
+    {
+        Token t;
+        
+        t = new Token();
+        t.setName(Names.CLASS);
+        globalST.add(new STEntry(t, "class", true));
+        t = new Token();
+        t.setName(Names.EXTENDS);
+        globalST.add(new STEntry(t, "extends", true));
+        t = new Token();
+        t.setName(Names.CONSTRUCTOR);
+        //CONTINUA COM AS DEMAIS PALAVRAS RESERVADAS
+    }
     
     public Parser(List tokenList)
     {
         this.tokenList = tokenList;
+        globalST = new SymbolTable<STEntry>();
+       
     }
     
     private void advance()
