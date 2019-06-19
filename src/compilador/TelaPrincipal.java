@@ -169,11 +169,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         entrada  = jTextAreaCodigo.getText();
         AnalisadorLexico lexico = new AnalisadorLexico(entrada);
         lexico.Tokens(this);
-        System.out.println("");
+        //System.out.println("");
         AnalisadorSintatico analisadorSintatico = new AnalisadorSintatico(lexico.tokenList);
         if(!lexico.erroLexico)
             analisadorSintatico.inicia(this);
-        System.out.println("");
+        //System.out.println("");
     }//GEN-LAST:event_jButtonRunActionPerformed
 
     public void jSetTextAreaConsole(String string)

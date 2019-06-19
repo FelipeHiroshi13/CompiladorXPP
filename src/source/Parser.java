@@ -7,6 +7,7 @@ package source;
 
 import compilador.AnalisadorSintatico;
 import java.util.List;
+import static tokens.Id.reserved;
 
 /**
  *
@@ -23,21 +24,44 @@ public class Parser
     {
         Token t;
         
-        t = new Token();
-        t.setName(Names.CLASS);
+        t = new Token(Names.CLASS);
         globalST.add(new STEntry(t, "class", true));
-        t = new Token();
-        t.setName(Names.EXTENDS);
+        t = new Token(Names.EXTENDS);
         globalST.add(new STEntry(t, "extends", true));
-        t = new Token();
-        t.setName(Names.CONSTRUCTOR);
-        //CONTINUA COM AS DEMAIS PALAVRAS RESERVADAS
+        t = new Token(Names.CONSTRUCTOR);
+        t = new Token(Names.INT);
+        globalST.add(new STEntry(t, "int", true));
+        t = new Token(Names.STRING);
+        globalST.add(new STEntry(t, "string", true));
+        t = new Token(Names.BREAK);
+        globalST.add(new STEntry(t, "break", true));
+        t = new Token(Names.PRINT);
+        globalST.add(new STEntry(t, "print", true));
+        t = new Token(Names.READ);
+        globalST.add(new STEntry(t, "read", true));
+        t = new Token(Names.RETURN);
+        globalST.add(new STEntry(t, "return", true));
+        t = new Token(Names.SUPER);
+        globalST.add(new STEntry(t, "super", true));
+        t = new Token(Names.IF);
+        globalST.add(new STEntry(t, "if", true));
+        t = new Token(Names.ELSE);
+        globalST.add(new STEntry(t, "else", true));
+        t = new Token(Names.FOR);
+        globalST.add(new STEntry(t, "for", true));
+        t = new Token(Names.NEW);
+        globalST.add(new STEntry(t, "new", true));
+        t = new Token(Names.CONSTRUCTOR);
+        globalST.add(new STEntry(t, "constructor", true));
+        t = new Token(Names.TYPE);
+        globalST.add(new STEntry(t, "type", true));
     }
     
     public Parser(List tokenList)
     {
         this.tokenList = tokenList;
         globalST = new SymbolTable<STEntry>();
+        //currentST = globalST;
        
     }
     

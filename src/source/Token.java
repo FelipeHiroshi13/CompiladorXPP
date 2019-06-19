@@ -23,6 +23,10 @@ public class Token
         erroLexico = false;
     }
     
+    public Token(Names name){
+        this.name =  name;
+    }
+    
     public void setName(Names name){
         this.name = name;
     }
