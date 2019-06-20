@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import static source.Error.telaPrincipal;
 import static tokens.Id.reserved;
 
 /**
@@ -23,7 +24,8 @@ public class Parser
     public static Token lToken;
     public SymbolTable<STEntry> globalST;
     public SymbolTable<STEntry> currentST;
-    public Map<String, SymbolTable> classesSTList; 
+    public Map<String, SymbolTable> classesSTMap;
+    public Map<String, String> classesMapping; 
     private void initSymbolTable()
     {
         Token t;
@@ -64,7 +66,8 @@ public class Parser
     {
         this.tokenList = tokenList;
         globalST = new SymbolTable<STEntry>();
-        classesSTList = new HashMap<>();
+        classesSTMap = new HashMap<>();
+        classesMapping = new HashMap<>();
         initSymbolTable();
         currentST = globalST;
     }
@@ -76,7 +79,7 @@ public class Parser
         addedSuccesfully = currentST.add(stEntry);
         if(!addedSuccesfully)
         {
-            throw new Error("erro Semantico com o lexema '" + lToken.getLexeme()+ "'");
+            telaPrincipal.jSetTextAreaConsole("Erro Semantico");
         }
     }
     
@@ -93,6 +96,24 @@ public class Parser
         newSymbolTable.parent = currentST;
         currentST = newSymbolTable;
         return newSymbolTable;
+    }
+    
+    public void VerifyAttribute(String classLexeme, String attributeLexeme)
+    {
+        SymbolTable classSymbolTable;
+        classSymbolTable = classesSTMap.get(classesMapping.get(classLexeme));
+        System.out.println(classesMapping.get(classLexeme));
+        if(classSymbolTable == null)
+        {
+            telaPrincipal.jSetTextAreaConsole("Classe nao definida");
+        }
+        else
+        {
+            if(classSymbolTable.get(attributeLexeme) == null)
+            {
+                telaPrincipal.jSetTextAreaConsole("Atributo " + attributeLexeme +  " nao existente na classe " + classLexeme);
+            }
+        }
     }
     
     private void advance()
@@ -170,7 +191,7 @@ public class Parser
         {            
             advance();
             SymbolTable newSymbolTable = CreateNewST(lToken, false);
-            classesSTList.put(lToken.getLexeme(), newSymbolTable);
+            classesSTMap.put(lToken.getLexeme(), newSymbolTable);
             match(Names.ID, Names.ID);
             classDeclLinha();
         }
@@ -282,6 +303,9 @@ public class Parser
             method = false;
         }
         if(lToken.getAttribute() != Names.PE){
+            System.out.println(tokenList.get(position-2).getAttribute());
+            if(tokenList.get(position-2).getAttribute() == Names.ID)
+                classesMapping.put( tokenList.get(position-1).getLexeme() , tokenList.get(position-2).getLexeme());
             AddToST(tokenList.get(position-1), false);
             match(Names.SEP, Names.POINTV);
         }
@@ -774,8 +798,9 @@ public class Parser
     {
     	if (lToken.getAttribute() == Names.POINT)
         {
-    		advance();
+    		advance();            
     		match(Names.ID);
+                VerifyAttribute(tokenList.get(position-3).getLexeme(), tokenList.get(position-1).getLexeme());
     		lValueCompLinha();
         }
     }
