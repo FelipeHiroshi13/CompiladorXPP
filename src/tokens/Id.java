@@ -70,7 +70,6 @@ public class Id extends Token implements TokenDefine{
             return false;
     }
     
-    //TODO fazer algo com as palavras reservadas
     public void isReserved(String input, Token lToken){
         if(reserved.containsKey(input))
         {

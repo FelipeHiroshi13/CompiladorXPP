@@ -370,7 +370,7 @@ public class Parser
         }
     }
     
-    public void constructDeclList() // Esse metodo e o de baixo sao realmente necessarios ?
+    public void constructDeclList() 
     {
         if (lToken.getAttribute()== Names.CONSTRUCTOR)
         {
@@ -529,7 +529,6 @@ public class Parser
         }
     }
     
-    // ################################ VERIFICAR PARAMLINHA #############################
     public void paramLinha()
     {
         if (lToken.getAttribute() == Names.COE)
