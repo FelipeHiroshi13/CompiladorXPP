@@ -18,6 +18,7 @@ import static source.Error.telaPrincipal;
  */
 public class Parser
 {
+    public boolean ErroSemantico = false;
     private int position = 0;
     private List<Token> tokenList;
     public static Token lToken;
@@ -79,6 +80,7 @@ public class Parser
         if(!addedSuccesfully)
         {
             telaPrincipal.jSetTextAreaConsole("Erro Semantico com o lexema '" + lToken.getLexeme() + "' na linha " + lToken.lineDebug);
+            ErroSemantico = true;
         }
     }
     
@@ -91,9 +93,10 @@ public class Parser
     private SymbolTable CreateNewST(Token lToken, boolean reserved)
     { 
         SymbolTable newSymbolTable = new SymbolTable<>();
-        AddToST(lToken, reserved);
+        AddToST(lToken, reserved); 
         newSymbolTable.parent = currentST;
         currentST = newSymbolTable;
+   
         return newSymbolTable;
     }
     
@@ -105,12 +108,14 @@ public class Parser
         if(classSymbolTable == null)
         {
             telaPrincipal.jSetTextAreaConsole("Classe nao definida");
+            ErroSemantico = true;
         }
         else
         {
             if(classSymbolTable.get(attributeLexeme) == null)
             {
-                telaPrincipal.jSetTextAreaConsole("Atributo " + attributeLexeme +  " nao existente na classe " + classLexeme);
+                telaPrincipal.jSetTextAreaConsole("Atributo '" + attributeLexeme +  "' nao existente na classe " + classLexeme);
+                ErroSemantico = true;
             }
         }
     }
@@ -311,6 +316,7 @@ public class Parser
         {
             AddToST(tokenList.get(position-1), false);
         }
+        
         
         if (lToken.getAttribute()== Names.VIR){
             varDeclOpt(isClass, className);

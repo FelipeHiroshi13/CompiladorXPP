@@ -22,29 +22,21 @@ import static source.Error.syntaxError;
  */
 public class AnalisadorSintatico {
     private List<Token> tokenList;
-    String msg = "................/¯`,\n" +
-"........../´¯/..../\n" +
-"....../¯/.../..../\n" +
-"..../../.../..../..,-----,\n" +
-"../../.../....//´...........`.\n" +
-"./../.../..../......../´¯\\....\\\n" +
-"('.('..('....('.......|.....'._.'\n" +
-".\\....................`\\.../´...)\n" +
-"...\\.....................V...../\n" +
-".....\\........................./\n" +
-".......`•...................•´\n" +
-"..........|.................|\n" +
-"........▓▒▒▒▒▒▒▒▓\n" +
-"........▓▒▒▒▒▒▒▒▓";
+    String msg = "Léxico Ok"
+            + "\nSintatico Ok";
             
     public AnalisadorSintatico(List tokenList){
         this.tokenList = tokenList;
     }
     public void inicia(TelaPrincipal telaPrincipal){
         StringWriter sw = new StringWriter();
+        String erroSemantico = "";
         Parser parser = new Parser(tokenList);
         parser.program();
-        telaPrincipal.jSetTextAreaConsole(msg);
+        if(!parser.ErroSemantico){
+            erroSemantico = "\nSemantico OK";
+        }
+        telaPrincipal.jSetTextAreaConsole(msg + erroSemantico);
     }
     
     public static Map<Names, String> debug;

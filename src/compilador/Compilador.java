@@ -15,7 +15,7 @@ import source.Parser;
 
 /**
  * Trabalho Compilador
- * Alunos: Felipe Hiroshi Baron, Thiago Luiz Targino, Walter Espirito Santo
+ * Alunos: Felipe Hiroshi Baron, Thiago Luiz Alves Targino, Walter do Espirito Santo Souza
  */
 public class Compilador {
 
