@@ -6,12 +6,11 @@
 package source;
 
 import compilador.AnalisadorSintatico;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static source.Error.telaPrincipal;
-import static tokens.Id.reserved;
+
 
 /**
  *
@@ -79,7 +78,7 @@ public class Parser
         addedSuccesfully = currentST.add(stEntry);
         if(!addedSuccesfully)
         {
-            telaPrincipal.jSetTextAreaConsole("Erro Semantico");
+            telaPrincipal.jSetTextAreaConsole("Erro Semantico com o lexema '" + lToken.getLexeme() + "' na linha " + lToken.lineDebug);
         }
     }
     
@@ -285,6 +284,7 @@ public class Parser
         boolean method = true;
         boolean isClass = false;
         String className = new String();
+        String variavel;
         if (lToken.getAttribute()== Names.COE) 
         {
             advance();
@@ -297,30 +297,31 @@ public class Parser
         }
         
         
-               
+        //variavel = lToken.getLexeme();       
         if(lToken.getAttribute() == Names.ID)
         {
             isClass = true;
             className = tokenList.get(position-1).getLexeme();
             classesMapping.put(lToken.getLexeme(), className);
-            
         }
         
         match(Names.ID, Names.ID);
         
-        AddToST(tokenList.get(position-1), false);
+        if (lToken.getAttribute()== Names.VIR || lToken.getAttribute()== Names.POINTV)
+        {
+            AddToST(tokenList.get(position-1), false);
+        }
+        
         if (lToken.getAttribute()== Names.VIR){
             varDeclOpt(isClass, className);
             method = false;
         }
         if(lToken.getAttribute() != Names.PE){
-            //System.out.println(tokenList.get(position-2).getAttribute());
-            //System.out.println(className);
             System.out.println(tokenList.get(position-1).getLexeme());
-            //AddToST(tokenList.get(position-1), false);
             match(Names.SEP, Names.POINTV);
         }
         else if(method){
+            //classesMapping.remove(variavel);
             CreateNewST(tokenList.get(position-1), false);
             methodBody();
         }

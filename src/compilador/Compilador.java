@@ -9,6 +9,7 @@ package compilador;
 
 import java.util.Scanner;
 import source.Error;
+import source.Parser;
 
 //import java.util.Scanner;
 

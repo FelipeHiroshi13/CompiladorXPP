@@ -167,6 +167,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonRunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRunActionPerformed
         entrada  = jTextAreaCodigo.getText();
+        jTextAreaConsole.setText("");
         AnalisadorLexico lexico = new AnalisadorLexico(entrada);
         lexico.Tokens(this);
         //System.out.println("");
@@ -184,6 +185,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void jMenuItemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewActionPerformed
         // TODO add your handling code here:
         jTextAreaCodigo.setText("");
+        jTextAreaConsole.setText("");
         lblNomeArquivo.setText("(Untitled.xxp)");
         file = null;
         
