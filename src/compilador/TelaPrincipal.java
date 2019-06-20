@@ -179,7 +179,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public void jSetTextAreaConsole(String string)
     {
-        jTextAreaConsole.setText(jTextAreaConsole.getText() + "\n" + string);
+        jTextAreaConsole.setText(jTextAreaConsole.getText() + string);
     }
             
     private void jMenuItemNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNewActionPerformed

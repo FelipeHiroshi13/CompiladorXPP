@@ -104,7 +104,7 @@ public class Parser
     {
         SymbolTable classSymbolTable;
         classSymbolTable = classesSTMap.get(classesMapping.get(classLexeme));
-        System.out.println(classesMapping.get(classLexeme));
+        //System.out.println(classesMapping.get(classLexeme));
         if(classSymbolTable == null)
         {
             telaPrincipal.jSetTextAreaConsole("Classe nao definida");
@@ -323,7 +323,7 @@ public class Parser
             method = false;
         }
         if(lToken.getAttribute() != Names.PE){
-            System.out.println(tokenList.get(position-1).getLexeme());
+            //System.out.println(tokenList.get(position-1).getLexeme());
             match(Names.SEP, Names.POINTV);
         }
         else if(method){
