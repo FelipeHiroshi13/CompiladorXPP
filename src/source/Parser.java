@@ -283,6 +283,8 @@ public class Parser
     public void varDeclLinha()
     {
         boolean method = true;
+        boolean isClass = false;
+        String className = new String();
         if (lToken.getAttribute()== Names.COE) 
         {
             advance();
@@ -295,18 +297,27 @@ public class Parser
         }
         
         
+               
+        if(lToken.getAttribute() == Names.ID)
+        {
+            isClass = true;
+            className = tokenList.get(position-1).getLexeme();
+            classesMapping.put(lToken.getLexeme(), className);
+            
+        }
         
         match(Names.ID, Names.ID);
         
+        AddToST(tokenList.get(position-1), false);
         if (lToken.getAttribute()== Names.VIR){
-            varDeclOpt();
+            varDeclOpt(isClass, className);
             method = false;
         }
         if(lToken.getAttribute() != Names.PE){
-            System.out.println(tokenList.get(position-2).getAttribute());
-            if(tokenList.get(position-2).getAttribute() == Names.ID)
-                classesMapping.put( tokenList.get(position-1).getLexeme() , tokenList.get(position-2).getLexeme());
-            AddToST(tokenList.get(position-1), false);
+            //System.out.println(tokenList.get(position-2).getAttribute());
+            //System.out.println(className);
+            System.out.println(tokenList.get(position-1).getLexeme());
+            //AddToST(tokenList.get(position-1), false);
             match(Names.SEP, Names.POINTV);
         }
         else if(method){
@@ -318,13 +329,16 @@ public class Parser
         
     }
     
-    public void varDeclOpt()
+    public void varDeclOpt(boolean isClass, String className)
     {
         if (lToken.getAttribute()== Names.VIR)
         {
             advance();
+            if(isClass)
+                classesMapping.put(lToken.getLexeme(), className);
+            AddToST(lToken, false);
             match(Names.ID);
-            varDeclOpt();
+            varDeclOpt(isClass, className);
         }
     }
 
